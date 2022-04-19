@@ -60,10 +60,10 @@ namespace piper::mpsc {
 
             /**
              * @brief Creates a synchronous receiver
-             * @param The size of the buffer
+             * @param n The size of the buffer
              * @note A size of zero represents a rendezvous channel
              */
-            Receiver(std::size_t);
+            Receiver(std::size_t n);
             Receiver(Receiver<T> &&) = default;
             Receiver(const Receiver<T> &) = delete;
 
@@ -87,34 +87,34 @@ namespace piper::mpsc {
         public:
             /**
              * @brief Creates a new Sender from a Receiver
-             * @param The connected receiver
+             * @param rx The connected receiver
              */
-            Sender(const Receiver<T> &);
+            Sender(const Receiver<T> &rx);
             /**
              * @brief Clones a sender
-             * @param The sender to clone
+             * @param tx The sender to clone
              */
-            Sender(const Sender<T> &) = default;
+            Sender(const Sender<T> &tx) = default;
             Sender(Sender<T> &&) = default;
             Sender() = delete;
 
             /**
              * @brief Copies and sends an item over the channel
-             * @param The item to send over the channel
+             * @param item The item to send over the channel
              * @throws std::runtime_error("receiver is expired")
              * 		   Thrown if the receiver no longer exists.
              * @note Blocks if using a synchronous buffer
              */
-            void send(const T &) noexcept(false) override;
+            void send(const T &item) noexcept(false) override;
 
             /**
              * @brief Moves and sends an item over the channel
-             * @param The item to send over the channel
+             * @param item The item to send over the channel
              * @throws std::runtime_error("receiver is expired")
              * 		   Thrown if the receiver no longer exists.
              * @note Blocks if using a synchronous buffer
              */
-            void send(T &&) noexcept(false) override;
+            void send(T &&item) noexcept(false) override;
     };
 
     /**
@@ -130,7 +130,7 @@ namespace piper::mpsc {
 
     /**
      * @brief Creates a synchronous channel
-     * @param The size of the buffer
+     * @param n The size of the buffer
      * @return A sender and a receiver
      * @note A size of 0 represents a rendezvous channel
      */
