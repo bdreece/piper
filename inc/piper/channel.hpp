@@ -57,18 +57,18 @@ namespace piper {
         public:
             /**
              * @brief Copies and sends an item over the channel
-             * @param The item being sent over the channel
+             * @param item The item being sent over the channel
              * @note Implementors of this interface may block on this method,
              * 		 and may also throw exceptions.
              */
-            virtual void send(const T &) = 0;
+            virtual void send(const T &item) = 0;
 
             /**
              * @brief Moves and sends an item over the channel
-             * @param The item being sent over the channel
+             * @param item The item being sent over the channel
              * @note Implementors of this interface may block on this method,
              * 		 and may also throw exceptions.
              */
-            virtual void send(T &&) = 0;
+            virtual void send(T &&item) = 0;
     };
 } // namespace piper
