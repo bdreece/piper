@@ -77,7 +77,7 @@ namespace piper::internal {
      * @tparam T The type of item stored in the buffer
      * @extends Buffer<T>
      */
-    template <typename T> class AsyncBuffer final : Buffer<T> {
+    template <typename T> class AsyncBuffer final : virtual Buffer<T> {
             std::condition_variable available;
 
         public:
@@ -116,7 +116,7 @@ namespace piper::internal {
      * @tparam T The type of item stored in the buffer
      * @extends Buffer<T>
      */
-    template <typename T> class SyncBuffer : Buffer<T> {
+    template <typename T> class SyncBuffer : virtual Buffer<T> {
         protected:
             std::size_t n;
             std::condition_variable available[2];
@@ -165,7 +165,7 @@ namespace piper::internal {
      * @tparam T The type of item transferred over the buffer
      * @extends SyncBuffer<T>
      */
-    template <typename T> class RendezvousBuffer final : SyncBuffer<T> {
+    template <typename T> class RendezvousBuffer final : virtual SyncBuffer<T> {
             bool ready;
 
         public:
