@@ -34,6 +34,7 @@
 #include <memory>
 #include <stdexcept>
 #include <tuple>
+#include <utility>
 
 #include "piper/channel.hpp"
 #include "piper/internal/buffer.hpp"
@@ -45,7 +46,7 @@ namespace piper::mpsc {
      * @class Receiver
      * @brief MPSC receiver
      * @tparam T The item being received over the channel
-     * @extends piper::internal::Receiver<T>
+     * @extends piper::Receiver<T>
      */
     template <typename T> class Receiver : piper::Receiver<T> {
             friend class Sender<T>;
@@ -79,7 +80,7 @@ namespace piper::mpsc {
      * @class Sender
      * @brief MPSC sender
      * @tparam T The item being sent over the channel
-     * @extends piper::internal::Sender<T>
+     * @extends piper::Sender<T>
      */
     template <typename T> class Sender : piper::Sender<T> {
             std::weak_ptr<piper::internal::Buffer<T>> buffer;
@@ -89,7 +90,7 @@ namespace piper::mpsc {
              * @brief Creates a new Sender from a Receiver
              * @param rx The connected receiver
              */
-            Sender(const Receiver<T> &rx);
+            Sender(const Receiver<T> &rx) : buffer(rx.buffer) {}
             /**
              * @brief Clones a sender
              * @param tx The sender to clone
@@ -121,11 +122,10 @@ namespace piper::mpsc {
      * @brief Creates an asynchronous channel
      * @return A sender and a receiver
      */
-    template <typename T>
-    std::tuple<piper::Sender<T>, piper::Receiver<T>> channel() {
+    template <typename T> std::tuple<Sender<T> &&, Receiver<T> &&> channel() {
         Receiver<T> rx;
         Sender<T> tx(rx);
-        return std::make_tuple(tx, rx);
+        return std::make_tuple(std::move(tx), std::move(rx));
     }
 
     /**
@@ -135,29 +135,37 @@ namespace piper::mpsc {
      * @note A size of 0 represents a rendezvous channel
      */
     template <typename T>
-    std::tuple<piper::Sender<T>, piper::Receiver<T>> channel(std::size_t n) {
+    std::tuple<Sender<T> &&, Receiver<T> &&> channel(std::size_t n) {
         Receiver<T> rx(n);
         Sender<T> tx(rx);
-        return std::make_tuple(tx, rx);
+        return std::make_tuple(std::move(tx), std::move(rx));
     }
 
     template <typename T> Receiver<T>::Receiver() {
-        buffer.reset(new piper::internal::AsyncBuffer<T>());
+        buffer = std::reinterpret_pointer_cast<piper::internal::Buffer<T>>(
+            std::make_shared<piper::internal::AsyncBuffer<T>>());
     }
 
     template <typename T> Receiver<T>::Receiver(std::size_t n) {
-        n > 0 ? buffer.reset(new piper::internal::SyncBuffer<T>(n))
-              : buffer.reset(new piper::internal::RendezvousBuffer<T>());
+        buffer =
+            n > 0
+                ? std::reinterpret_pointer_cast<piper::internal::Buffer<T>>(
+                      std::make_shared<piper::internal::SyncBuffer<T>>(n))
+                : std::reinterpret_pointer_cast<piper::internal::Buffer<T>>(
+                      std::make_shared<piper::internal::RendezvousBuffer<T>>());
     }
 
     template <typename T> T Receiver<T>::recv() { return buffer->pop(); }
-
-    template <typename T>
-    Sender<T>::Sender(const Receiver<T> &other) : buffer(other.buffer) {}
 
     template <typename T> void Sender<T>::send(const T &item) {
         if (buffer.expired())
             throw std::runtime_error("receiver is expired");
         buffer.lock()->push(item);
+    }
+
+    template <typename T> void Sender<T>::send(T &&item) {
+        if (buffer.expired())
+            throw std::runtime_error("receiver is expired");
+        buffer.lock()->push(std::forward<T>(item));
     }
 } // namespace piper::mpsc
