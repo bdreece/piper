@@ -73,6 +73,11 @@ $(function() {
   <div class="headertitle"><div class="title">piper::spmc::Receiver&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>SPMC receiver.  
+ <a href="classpiper_1_1spmc_1_1Receiver.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="spmc_8hpp_source.html">spmc.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for piper::spmc::Receiver&lt; T &gt;:</div>
 <div class="dyncontent">
@@ -85,10 +90,59 @@ Inheritance diagram for piper::spmc::Receiver&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a72600be61ed75414b96182cef0921979"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html#a72600be61ed75414b96182cef0921979">Receiver</a> (const <a class="el" href="classpiper_1_1spmc_1_1Sender.html">Sender</a>&lt; T &gt; &amp;tx)</td></tr>
+<tr class="memdesc:a72600be61ed75414b96182cef0921979"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classpiper_1_1spmc_1_1Receiver.html" title="SPMC receiver.">Receiver</a> from a <a class="el" href="classpiper_1_1spmc_1_1Sender.html" title="SPMC sender.">Sender</a>.  <a href="classpiper_1_1spmc_1_1Receiver.html#a72600be61ed75414b96182cef0921979">More...</a><br /></td></tr>
+<tr class="separator:a72600be61ed75414b96182cef0921979"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6976b4d277d9581a9120a11cb7cc3af"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html#ac6976b4d277d9581a9120a11cb7cc3af">recv</a> () noexcept(false) override</td></tr>
-<tr class="memdesc:ac6976b4d277d9581a9120a11cb7cc3af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives an item from the channel.  <a href="classpiper_1_1spmc_1_1Receiver.html#ac6976b4d277d9581a9120a11cb7cc3af">More...</a><br /></td></tr>
+<tr class="memdesc:ac6976b4d277d9581a9120a11cb7cc3af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive an item over the channel.  <a href="classpiper_1_1spmc_1_1Receiver.html#ac6976b4d277d9581a9120a11cb7cc3af">More...</a><br /></td></tr>
 <tr class="separator:ac6976b4d277d9581a9120a11cb7cc3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+class piper::spmc::Receiver&lt; T &gt;</div><p >SPMC receiver. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The item being received over the channel &lt;T&gt; </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a72600be61ed75414b96182cef0921979" name="a72600be61ed75414b96182cef0921979"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72600be61ed75414b96182cef0921979">&#9670;&nbsp;</a></span>Receiver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver</a>&lt; T &gt;::Receiver </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classpiper_1_1spmc_1_1Sender.html">Sender</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>tx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a <a class="el" href="classpiper_1_1spmc_1_1Receiver.html" title="SPMC receiver.">Receiver</a> from a <a class="el" href="classpiper_1_1spmc_1_1Sender.html" title="SPMC sender.">Sender</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tx</td><td>The connected <a class="el" href="classpiper_1_1spmc_1_1Sender.html" title="SPMC sender.">Sender</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac6976b4d277d9581a9120a11cb7cc3af" name="ac6976b4d277d9581a9120a11cb7cc3af"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac6976b4d277d9581a9120a11cb7cc3af">&#9670;&nbsp;</a></span>recv()</h2>
@@ -102,10 +156,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T <a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver</a>&lt; T &gt;::recv </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname">T <a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver</a>&lt; T &gt;::recv</td>
         </tr>
       </table>
   </td>
@@ -115,9 +166,15 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Receives an item from the channel. </p>
+<p>Receive an item over the channel. </p>
 <dl class="section return"><dt>Returns</dt><dd>The item received over the channel </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Implementors of this interface may block on this method, and may also throw exceptions. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error("sender</td><td>is expired") Thrown if the sender no longer exists. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Blocks on empty buffer </dd></dl>
 
 <p>Implements <a class="el" href="classpiper_1_1Receiver.html#adb0704cbf1d6200d6f1e0d280fcc0248">piper::Receiver&lt; T &gt;</a>.</p>
 
