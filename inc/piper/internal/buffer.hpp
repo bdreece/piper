@@ -35,6 +35,7 @@
 #include <condition_variable>
 #include <deque>
 #include <mutex>
+#include <utility>
 
 namespace piper::internal {
     /**
@@ -49,17 +50,11 @@ namespace piper::internal {
 
         public:
             /**
-             * @brief Copies and pushes an item into the buffer
+             * @brief Pushes an item into the buffer
              * @param item The item being pushed into the buffer
              * @note Implementors of this virtual method may block.
              */
             virtual void push(const T &item) = 0;
-
-            /**
-             * @brief Moves and pushes a temporary item into the buffer
-             * @param item The item being pushed into the buffer
-             * @note Implementors of this virtual method may block.
-             */
             virtual void push(T &&item) = 0;
 
             /**
@@ -77,7 +72,7 @@ namespace piper::internal {
      * @tparam T The type of item stored in the buffer
      * @extends Buffer<T>
      */
-    template <typename T> class AsyncBuffer final : virtual Buffer<T> {
+    template <typename T> class AsyncBuffer final : public Buffer<T> {
             std::condition_variable available;
 
         public:
@@ -89,17 +84,11 @@ namespace piper::internal {
             AsyncBuffer(AsyncBuffer<T> &&) = delete;
 
             /**
-             * @brief Copies and pushes an item into the buffer
+             * @brief Pushes an item into the buffer
              * @param item The item being pushed into the buffer
              * @note This method should not block
              */
             void push(const T &item) override;
-
-            /**
-             * @brief Moves and pushes a temporary item into the buffer
-             * @param item The item being pushed into the buffer
-             * @note This method should not block
-             */
             void push(T &&item) override;
 
             /**
@@ -116,7 +105,7 @@ namespace piper::internal {
      * @tparam T The type of item stored in the buffer
      * @extends Buffer<T>
      */
-    template <typename T> class SyncBuffer : virtual Buffer<T> {
+    template <typename T> class SyncBuffer : public Buffer<T> {
         protected:
             std::size_t n;
             std::condition_variable available[2];
@@ -135,17 +124,11 @@ namespace piper::internal {
             SyncBuffer(SyncBuffer<T> &&) = delete;
 
             /**
-             * @brief Copies and pushes an item into the buffer
+             * @brief Pushes an item into the buffer
              * @param item The item being pushed into the buffer
              * @note Blocks on a full buffer
              */
             virtual void push(const T &item) override;
-
-            /**
-             * @brief Moves and pushes a temporary item into the buffer
-             * @param item The item being pushed into the buffer
-             * @note Blocks on a full buffer
-             */
             virtual void push(T &&item) override;
 
             /**
@@ -165,7 +148,7 @@ namespace piper::internal {
      * @tparam T The type of item transferred over the buffer
      * @extends SyncBuffer<T>
      */
-    template <typename T> class RendezvousBuffer final : virtual SyncBuffer<T> {
+    template <typename T> class RendezvousBuffer final : public SyncBuffer<T> {
             bool ready;
 
         public:
@@ -177,17 +160,11 @@ namespace piper::internal {
             RendezvousBuffer(RendezvousBuffer<T> &&) = delete;
 
             /**
-             * @brief Copies and pushes an item into the buffer
+             * @brief Pushes an item into the buffer
              * @param item The item being pushed into the buffer
              * @note Blocks awaiting a call to pop()
              */
             void push(const T &item) override;
-
-            /**
-             * @brief Moves and pushes an item into the buffer
-             * @param item The item being pushed into the buffer
-             * @note Blocks awaiting a call to pop()
-             */
             void push(T &&item) override;
 
             /**
@@ -210,7 +187,17 @@ namespace piper::internal {
         this->available.notify_one();
     }
 
-    template <typename T> void AsyncBuffer<T>::push(T &&item) { push(item); }
+    template <typename T> void AsyncBuffer<T>::push(T &&item) {
+        {
+            // Acquire lock
+            std::unique_lock<std::mutex> lock(this->mutex);
+
+            // Push item to queue
+            this->queue.push_back(std::forward<T>(item));
+        }
+
+        this->available.notify_one();
+    }
 
     template <typename T> T AsyncBuffer<T>::pop() {
         T item;
@@ -244,7 +231,21 @@ namespace piper::internal {
         this->available[0].notify_one();
     }
 
-    template <typename T> void SyncBuffer<T>::push(T &&item) { push(item); }
+    template <typename T> void SyncBuffer<T>::push(T &&item) {
+        {
+            // Acquire lock
+            std::unique_lock<std::mutex> lock(this->mutex);
+
+            // Block sender if queue is full
+            this->available[1].wait(lock,
+                                    [this] { return this->queue.size() < n; });
+
+            // Push item to queue
+            this->queue.push_back(std::forward<T>(item));
+        }
+        // Notify a waiting receiver
+        this->available[0].notify_one();
+    }
 
     template <typename T> T SyncBuffer<T>::pop() {
         T item;
@@ -286,7 +287,22 @@ namespace piper::internal {
     }
 
     template <typename T> void RendezvousBuffer<T>::push(T &&item) {
-        push(item);
+        {
+            // Acquire lock
+            std::unique_lock<std::mutex> lock(this->mutex);
+
+            // Block sender until ready with receivers
+            this->available[1].wait(lock,
+                                    [this] { return ready && this->n > 0; });
+
+            // No longer ready for input
+            ready = false;
+
+            // Push item to queue
+            this->queue.push_back(std::forward<T>(item));
+        }
+        // Notify a waiting receiver
+        this->available[0].notify_one();
     }
 
     template <typename T> T RendezvousBuffer<T>::pop() {
