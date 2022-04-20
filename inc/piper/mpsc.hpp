@@ -48,7 +48,7 @@ namespace piper::mpsc {
      * @tparam T The item being received over the channel
      * @extends piper::Receiver<T>
      */
-    template <typename T> class Receiver : piper::Receiver<T> {
+    template <typename T> class Receiver : public piper::Receiver<T> {
             friend class Sender<T>;
 
             std::shared_ptr<piper::internal::Buffer<T>> buffer;
@@ -82,7 +82,7 @@ namespace piper::mpsc {
      * @tparam T The item being sent over the channel
      * @extends piper::Sender<T>
      */
-    template <typename T> class Sender : piper::Sender<T> {
+    template <typename T> class Sender : public piper::Sender<T> {
             std::weak_ptr<piper::internal::Buffer<T>> buffer;
 
         public:
@@ -90,7 +90,7 @@ namespace piper::mpsc {
              * @brief Creates a new Sender from a Receiver
              * @param rx The connected receiver
              */
-            Sender(const Receiver<T> &rx) : buffer(rx.buffer) {}
+            Sender(const Receiver<T> &rx) : buffer{rx.buffer} {}
             /**
              * @brief Clones a sender
              * @param tx The sender to clone
@@ -100,21 +100,13 @@ namespace piper::mpsc {
             Sender() = delete;
 
             /**
-             * @brief Copies and sends an item over the channel
+             * @brief Sends an item over the channel
              * @param item The item to send over the channel
-             * @throws std::runtime_error("receiver is expired")
-             * 		   Thrown if the receiver no longer exists.
+             * @throws std::runtime_error Thrown if the receiver
+             * 		   no longer exists.
              * @note Blocks if using a synchronous buffer
              */
             void send(const T &item) noexcept(false) override;
-
-            /**
-             * @brief Moves and sends an item over the channel
-             * @param item The item to send over the channel
-             * @throws std::runtime_error("receiver is expired")
-             * 		   Thrown if the receiver no longer exists.
-             * @note Blocks if using a synchronous buffer
-             */
             void send(T &&item) noexcept(false) override;
     };
 
@@ -122,10 +114,10 @@ namespace piper::mpsc {
      * @brief Creates an asynchronous channel
      * @return A sender and a receiver
      */
-    template <typename T> std::tuple<Sender<T> &&, Receiver<T> &&> channel() {
-        Receiver<T> rx;
-        Sender<T> tx(rx);
-        return std::make_tuple(std::move(tx), std::move(rx));
+    template <typename T> std::tuple<Sender<T>, Receiver<T>> channel() {
+        auto rx = Receiver<T>();
+        auto tx = Sender<T>(rx);
+        return std::make_tuple(tx, rx);
     }
 
     /**
@@ -135,24 +127,24 @@ namespace piper::mpsc {
      * @note A size of 0 represents a rendezvous channel
      */
     template <typename T>
-    std::tuple<Sender<T> &&, Receiver<T> &&> channel(std::size_t n) {
-        Receiver<T> rx(n);
-        Sender<T> tx(rx);
-        return std::make_tuple(std::move(tx), std::move(rx));
+    std::tuple<Sender<T>, Receiver<T>> channel(std::size_t n) {
+        auto rx = Receiver<T>(n);
+        auto tx = Sender<T>(rx);
+        return std::make_tuple(tx, rx);
     }
 
     template <typename T> Receiver<T>::Receiver() {
-        buffer = std::reinterpret_pointer_cast<piper::internal::Buffer<T>>(
-            std::make_shared<piper::internal::AsyncBuffer<T>>());
+        using namespace piper::internal;
+        buffer.reset(new AsyncBuffer<T>{});
     }
 
     template <typename T> Receiver<T>::Receiver(std::size_t n) {
-        buffer =
-            n > 0
-                ? std::reinterpret_pointer_cast<piper::internal::Buffer<T>>(
-                      std::make_shared<piper::internal::SyncBuffer<T>>(n))
-                : std::reinterpret_pointer_cast<piper::internal::Buffer<T>>(
-                      std::make_shared<piper::internal::RendezvousBuffer<T>>());
+        using namespace piper::internal;
+        if (n > 0) {
+            buffer.reset(new SyncBuffer<T>{n});
+        } else {
+            buffer.reset(new RendezvousBuffer<T>{});
+        }
     }
 
     template <typename T> T Receiver<T>::recv() { return buffer->pop(); }

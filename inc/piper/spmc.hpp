@@ -46,7 +46,7 @@ namespace piper::spmc {
      * @tparam T The item being received over the channel
      * @extends piper::Receiver<T>
      */
-    template <typename T> class Receiver : piper::Receiver<T> {
+    template <typename T> class Receiver : public piper::Receiver<T> {
             std::weak_ptr<piper::internal::Buffer<T>> buffer;
 
         public:
@@ -54,7 +54,7 @@ namespace piper::spmc {
              * @brief Creates a Receiver from a Sender
              * @param tx The connected Sender
              */
-            Receiver(const Sender<T> &tx) : buffer(tx.buffer) {}
+            Receiver(const Sender<T> &tx) : buffer{tx.buffer} {}
             Receiver(const Receiver<T> &) = default;
             Receiver(Receiver<T> &&) = default;
             Receiver() = delete;
@@ -62,8 +62,8 @@ namespace piper::spmc {
             /**
              * @brief 	Receive an item over the channel
              * @return 	The item received over the channel
-             * @throws 	std::runtime_error("sender is expired")
-             * 		   	Thrown if the sender no longer exists.
+             * @throws 	std::runtime_error Thrown if the sender
+             * 			no longer exists.
              * @note 	Blocks on empty buffer
              */
             T recv() noexcept(false) override;
@@ -75,7 +75,7 @@ namespace piper::spmc {
      * @tparam 	T The item being sent over the channel
      * @extends	piper::Sender<T>
      */
-    template <typename T> class Sender : piper::Sender<T> {
+    template <typename T> class Sender : public piper::Sender<T> {
             friend class Receiver<T>;
 
             std::shared_ptr<piper::internal::Buffer<T>> buffer;
@@ -96,17 +96,11 @@ namespace piper::spmc {
             Sender(const Sender<T> &) = delete;
 
             /**
-             * @brief Copies and sends an item over the channel
+             * @brief Sends an item over the channel
              * @param item The item being sent over the channel
              * @note  May block if using a synchronous buffer
              */
             void send(const T &item) override;
-
-            /**
-             * @brief Moves and sends an item over the channel
-             * @param item The item being sent over the channel
-             * @note  May block if using a synchronous buffer
-             */
             void send(T &&item) override;
     };
 
@@ -114,10 +108,9 @@ namespace piper::spmc {
      * @brief Creates an asynchronous channel
      * @return A sender and a receiver
      */
-    template <typename T>
-    std::tuple<piper::Sender<T>, piper::Receiver<T>> channel() {
-        Sender<T> tx;
-        Receiver<T> rx(tx);
+    template <typename T> std::tuple<Sender<T>, Receiver<T>> channel() {
+        auto tx = Sender<T>();
+        auto rx = Receiver<T>(tx);
         return std::make_tuple(tx, rx);
     }
 
@@ -128,9 +121,9 @@ namespace piper::spmc {
      * @note A size of zero represents a rendezvous channel
      */
     template <typename T>
-    std::tuple<piper::Sender<T>, piper::Receiver<T>> channel(std::size_t n) {
-        Sender<T> tx(n);
-        Receiver<T> rx(tx);
+    std::tuple<Sender<T>, Receiver<T>> channel(std::size_t n) {
+        auto tx = Sender<T>(n);
+        auto rx = Receiver<T>(tx);
         return std::make_tuple(tx, rx);
     }
 
@@ -141,13 +134,17 @@ namespace piper::spmc {
     }
 
     template <typename T> Sender<T>::Sender() {
-        buffer = std::make_shared<piper::internal::AsyncBuffer<T>>();
+        using namespace piper::internal;
+        buffer.reset(new AsyncBuffer<T>{});
     }
 
     template <typename T> Sender<T>::Sender(std::size_t n) {
-        buffer = n > 0
-                     ? std::make_shared<piper::internal::SyncBuffer<T>>(n)
-                     : std::make_shared<piper::internal::RendezvousBuffer<T>>();
+        using namespace piper::internal;
+        if (n > 0) {
+            buffer.reset(new SyncBuffer<T>{n});
+        } else {
+            buffer.reset(new RendezvousBuffer<T>{});
+        }
     }
 
     template <typename T> void Sender<T>::send(const T &item) {
