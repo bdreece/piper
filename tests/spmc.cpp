@@ -23,97 +23,108 @@
  */
 
 /**
- * @file		mpsc.cpp
- * @brief		MPSC testing suite
+ * @file		spmc.cpp
+ * @brief		SPMC testing suite
  * @author		Brian Reece
  * @version		0.1
  * @copyright	MIT License
  * @date		2022-04-19
  */
 
-#include <algorithm>
-#include <array>
-#include <iterator>
+#include <functional>
 #include <memory>
 #include <stdexcept>
 #include <thread>
 #include <tuple>
+#include <vector>
 
-#define BOOST_TEST_MODULE mpsc
+#define BOOST_TEST_MODULE spmc
 #include <boost/test/unit_test.hpp>
 
-#include "piper/mpsc.hpp"
-using namespace piper::mpsc;
+#include "piper/spmc.hpp"
+using namespace piper::spmc;
 
-BOOST_AUTO_TEST_SUITE(mpsc_exceptions)
+BOOST_AUTO_TEST_SUITE(spmc_exceptions)
 
 /**
- * @test 	mpsc_exceptions/expired
- * @brief 	Asserts that tx.send() throws exception
- * 		  	after rx is destroyed.
+ * @test spmc_exceptions/expired
+ * @brief Asserts that exception is throw if rx.recv()
+ * 		  is called after tx is destroyed.
  */
 BOOST_AUTO_TEST_CASE(expired) {
-    using namespace piper::mpsc;
-    auto rx = new Receiver<int>{};
-    auto tx = Sender<int>{*rx};
-    delete rx;
+    auto tx = new Sender<int>{};
+    auto rx = Receiver<int>{*tx};
+    delete tx;
     try {
-        tx.send(1);
+        int val = rx.recv();
     } catch (const std::runtime_error &e) {
-        BOOST_TEST(e.what() == "receiver is expired");
+        BOOST_TEST(e.what() == "sender is expired");
     }
 }
 
-BOOST_AUTO_TEST_SUITE_END() // mpsc_exceptions
+BOOST_AUTO_TEST_SUITE_END()
 
-BOOST_AUTO_TEST_SUITE(mpsc_async)
+BOOST_AUTO_TEST_SUITE(spmc_async)
 
 struct fixture {
-        std::unique_ptr<piper::mpsc::Receiver<int>> rx;
+        std::unique_ptr<Sender<int>> tx;
 
-        fixture() {
-            using namespace piper::mpsc;
-            rx = std::make_unique<Receiver<int>>();
-        }
+        fixture() { tx = std::make_unique<Sender<int>>(); }
 };
 
 /**
- * @test one_sender
+ * @test spmc_async/one_receiver
  * @brief Asserts that one sender can send one receiver
- * 		  five integers over the channel to the receiver.
+ * 		  five integers.
  */
-BOOST_FIXTURE_TEST_CASE(one_sender, fixture) {
-    using namespace piper::mpsc;
+BOOST_FIXTURE_TEST_CASE(one_receiver, fixture) {
     std::thread worker(
-        [](auto &&tx) {
+        [](auto &&rx) {
             for (int i = 0; i < 5; i++) {
-                tx << i;
+                int j;
+                BOOST_TEST(rx.recv() == i);
             }
         },
-        std::move(Sender<int>{*rx}));
+        std::move(Receiver<int>{*tx}));
+
     for (int i = 0; i < 5; i++) {
-        BOOST_TEST(rx->recv() == 1);
+        *tx << i;
     }
-    worker.join();
 }
 
 /**
- * @test mpsc_async/five_senders
- * @brief Asserts that five senders can send one receiver
- * 		  five integers over the channel.
+ * @test spmc_async/five_receivers
+ * @brief Asserts that one sender can send five receivers
+ * 		  ten integers.
  */
-BOOST_FIXTURE_TEST_CASE(five_senders, fixture) {
-    using namespace piper::mpsc;
-    std::vector<std::thread> workers{5};
+BOOST_FIXTURE_TEST_CASE(five_receivers, fixture) {
+    std::vector<std::thread> workers(5);
     std::generate(workers.begin(), workers.end(), [this]() {
-        return std::thread([](auto tx) { tx << 1; }, Sender<int>{*rx});
+        return std::thread(
+            [](auto rx) {
+                int n = 0;
+                while (n < 2) {
+                    auto i = rx.recv();
+                    n++;
+                }
+                BOOST_TEST(true);
+            },
+            Receiver<int>(*tx));
     });
 
-    for (int i = 0; i < 5; i++) {
-        BOOST_TEST(rx->recv() == 1);
+    for (int i = 0; i < 10; i++) {
+        *tx << i;
     }
-
-    std::for_each(workers.begin(), workers.end(), [](auto &tx) { tx.join(); });
 }
 
-BOOST_AUTO_TEST_SUITE_END() // mpsc_async
+BOOST_AUTO_TEST_SUITE_END() // spmc_async
+
+BOOST_AUTO_TEST_SUITE(spmc_sync)
+
+struct fixture {
+        std::unique_ptr<Sender<int>> tx;
+
+        fixture() { tx = std::make_unique<Sender<int>>(); }
+};
+
+BOOST_AUTO_TEST_SUITE_END() // synch
