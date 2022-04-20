@@ -34,6 +34,8 @@
 #include <memory>
 #include <utility>
 namespace piper {
+    template <typename T> class Sender;
+
     /**
      * @interface Receiver
      * @brief The interface for channel receivers
@@ -88,6 +90,25 @@ namespace piper {
     template <typename T> Sender<T> &Sender<T>::operator<<(T &&item) {
         send(std::forward<T>(item));
         return *this;
+    }
+
+    template <typename T>
+    std::basic_ostream<T> &operator<<(std::basic_ostream<T> &os,
+                                      Receiver<T> &rx) {
+        os.put(rx.recv());
+        return os;
+    }
+
+    template <typename T>
+    std::basic_istream<T> &operator>>(std::basic_istream<T> &is,
+                                      Sender<T> &tx) {
+        T item = {};
+        is.get(item);
+        if (item == T{}) {
+            is.setstate(std::ios::failbit);
+        }
+        tx << item;
+        return is;
     }
 
 } // namespace piper
