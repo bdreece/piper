@@ -3,3 +3,9 @@
 
 # Build directory
 build/
+
+# prog script
+prog.yml
+
+# errands list
+errands.yml
