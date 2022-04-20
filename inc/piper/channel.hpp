@@ -31,6 +31,8 @@
  *  @date	 	2022-04-19
  */
 
+#include <memory>
+#include <utility>
 namespace piper {
     /**
      * @interface Receiver
@@ -39,6 +41,7 @@ namespace piper {
      */
     template <typename T> class Receiver {
         public:
+            virtual ~Receiver() {}
             /**
              * @brief Receives an item from the channel
              * @return The item received over the channel
@@ -46,6 +49,8 @@ namespace piper {
              * 		 and may also throw exceptions.
              */
             virtual T recv() = 0;
+
+            Receiver<T> &operator>>(T &item);
     };
 
     /**
@@ -55,20 +60,34 @@ namespace piper {
      */
     template <typename T> class Sender {
         public:
+            virtual ~Sender() {}
+
             /**
-             * @brief Copies and sends an item over the channel
+             * @brief Sends an item over the channel
              * @param item The item being sent over the channel
              * @note Implementors of this interface may block on this method,
              * 		 and may also throw exceptions.
              */
             virtual void send(const T &item) = 0;
-
-            /**
-             * @brief Moves and sends an item over the channel
-             * @param item The item being sent over the channel
-             * @note Implementors of this interface may block on this method,
-             * 		 and may also throw exceptions.
-             */
             virtual void send(T &&item) = 0;
+
+            Sender<T> &operator<<(const T &item);
+            Sender<T> &operator<<(T &&item);
     };
+
+    template <typename T> Receiver<T> &Receiver<T>::operator>>(T &item) {
+        item = recv();
+        return *this;
+    }
+
+    template <typename T> Sender<T> &Sender<T>::operator<<(const T &item) {
+        send(item);
+        return *this;
+    }
+
+    template <typename T> Sender<T> &Sender<T>::operator<<(T &&item) {
+        send(std::forward<T>(item));
+        return *this;
+    }
+
 } // namespace piper
