@@ -96,6 +96,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac6976b4d277d9581a9120a11cb7cc3af"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html#ac6976b4d277d9581a9120a11cb7cc3af">recv</a> () noexcept(false) override</td></tr>
 <tr class="memdesc:ac6976b4d277d9581a9120a11cb7cc3af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive an item over the channel.  <a href="classpiper_1_1spmc_1_1Receiver.html#ac6976b4d277d9581a9120a11cb7cc3af">More...</a><br /></td></tr>
 <tr class="separator:ac6976b4d277d9581a9120a11cb7cc3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb0704cbf1d6200d6f1e0d280fcc0248"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Receiver.html#adb0704cbf1d6200d6f1e0d280fcc0248">recv</a> ()=0</td></tr>
+<tr class="memdesc:adb0704cbf1d6200d6f1e0d280fcc0248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives an item from the channel.  <a href="classpiper_1_1Receiver.html#adb0704cbf1d6200d6f1e0d280fcc0248">More...</a><br /></td></tr>
+<tr class="separator:adb0704cbf1d6200d6f1e0d280fcc0248"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -170,7 +173,7 @@ template&lt;typename T &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>The item received over the channel </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">std::runtime_error("sender</td><td>is expired") Thrown if the sender no longer exists. </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the sender no longer exists. </td></tr>
   </table>
   </dd>
 </dl>

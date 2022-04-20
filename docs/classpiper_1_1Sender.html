@@ -92,11 +92,8 @@ Inheritance diagram for piper::Sender&lt; T &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa32fd4423301b9ab40887099a73c988a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Sender.html#aa32fd4423301b9ab40887099a73c988a">send</a> (const T &amp;item)=0</td></tr>
-<tr class="memdesc:aa32fd4423301b9ab40887099a73c988a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies and sends an item over the channel.  <a href="classpiper_1_1Sender.html#aa32fd4423301b9ab40887099a73c988a">More...</a><br /></td></tr>
+<tr class="memdesc:aa32fd4423301b9ab40887099a73c988a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends an item over the channel.  <a href="classpiper_1_1Sender.html#aa32fd4423301b9ab40887099a73c988a">More...</a><br /></td></tr>
 <tr class="separator:aa32fd4423301b9ab40887099a73c988a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a543916429ae328314d54bad85ebb03"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Sender.html#a1a543916429ae328314d54bad85ebb03">send</a> (T &amp;&amp;item)=0</td></tr>
-<tr class="memdesc:a1a543916429ae328314d54bad85ebb03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves and sends an item over the channel.  <a href="classpiper_1_1Sender.html#a1a543916429ae328314d54bad85ebb03">More...</a><br /></td></tr>
-<tr class="separator:a1a543916429ae328314d54bad85ebb03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -109,7 +106,7 @@ interface piper::Sender&lt; T &gt;</div><p >The interface for channel senders. <
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa32fd4423301b9ab40887099a73c988a" name="aa32fd4423301b9ab40887099a73c988a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa32fd4423301b9ab40887099a73c988a">&#9670;&nbsp;</a></span>send() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa32fd4423301b9ab40887099a73c988a">&#9670;&nbsp;</a></span>send()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -134,7 +131,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Copies and sends an item over the channel. </p>
+<p>Sends an item over the channel. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">item</td><td>The item being sent over the channel </td></tr>
@@ -144,45 +141,6 @@ template&lt;typename T &gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Implementors of this interface may block on this method, and may also throw exceptions. </dd></dl>
 
 <p>Implemented in <a class="el" href="classpiper_1_1mpsc_1_1Sender.html#af2057819a67d89c70fe570e391172872">piper::mpsc::Sender&lt; T &gt;</a>, and <a class="el" href="classpiper_1_1spmc_1_1Sender.html#ab359cbd64078be42481c60270a9d3d0a">piper::spmc::Sender&lt; T &gt;</a>.</p>
-
-</div>
-</div>
-<a id="a1a543916429ae328314d54bad85ebb03" name="a1a543916429ae328314d54bad85ebb03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a543916429ae328314d54bad85ebb03">&#9670;&nbsp;</a></span>send() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void <a class="el" href="classpiper_1_1Sender.html">piper::Sender</a>&lt; T &gt;::send </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
-          <td class="paramname"><em>item</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Moves and sends an item over the channel. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">item</td><td>The item being sent over the channel </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>Implementors of this interface may block on this method, and may also throw exceptions. </dd></dl>
-
-<p>Implemented in <a class="el" href="classpiper_1_1mpsc_1_1Sender.html#a7f3136fa3f9dffec25c2e55d68c52208">piper::mpsc::Sender&lt; T &gt;</a>, and <a class="el" href="classpiper_1_1spmc_1_1Sender.html#a9b1181c86f32d0273a5c7ae476bdeda1">piper::spmc::Sender&lt; T &gt;</a>.</p>
 
 </div>
 </div>

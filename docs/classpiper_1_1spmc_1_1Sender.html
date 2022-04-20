@@ -98,11 +98,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a543209d24b732e1ed1b43ca07b079678"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a synchronous <a class="el" href="classpiper_1_1spmc_1_1Sender.html" title="SPMC sender.">Sender</a>.  <a href="classpiper_1_1spmc_1_1Sender.html#a543209d24b732e1ed1b43ca07b079678">More...</a><br /></td></tr>
 <tr class="separator:a543209d24b732e1ed1b43ca07b079678"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab359cbd64078be42481c60270a9d3d0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1spmc_1_1Sender.html#ab359cbd64078be42481c60270a9d3d0a">send</a> (const T &amp;item) override</td></tr>
-<tr class="memdesc:ab359cbd64078be42481c60270a9d3d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies and sends an item over the channel.  <a href="classpiper_1_1spmc_1_1Sender.html#ab359cbd64078be42481c60270a9d3d0a">More...</a><br /></td></tr>
+<tr class="memdesc:ab359cbd64078be42481c60270a9d3d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends an item over the channel.  <a href="classpiper_1_1spmc_1_1Sender.html#ab359cbd64078be42481c60270a9d3d0a">More...</a><br /></td></tr>
 <tr class="separator:ab359cbd64078be42481c60270a9d3d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b1181c86f32d0273a5c7ae476bdeda1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1spmc_1_1Sender.html#a9b1181c86f32d0273a5c7ae476bdeda1">send</a> (T &amp;&amp;item) override</td></tr>
-<tr class="memdesc:a9b1181c86f32d0273a5c7ae476bdeda1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves and sends an item over the channel.  <a href="classpiper_1_1spmc_1_1Sender.html#a9b1181c86f32d0273a5c7ae476bdeda1">More...</a><br /></td></tr>
-<tr class="separator:a9b1181c86f32d0273a5c7ae476bdeda1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa32fd4423301b9ab40887099a73c988a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Sender.html#aa32fd4423301b9ab40887099a73c988a">send</a> (const T &amp;item)=0</td></tr>
+<tr class="memdesc:aa32fd4423301b9ab40887099a73c988a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends an item over the channel.  <a href="classpiper_1_1Sender.html#aa32fd4423301b9ab40887099a73c988a">More...</a><br /></td></tr>
+<tr class="separator:aa32fd4423301b9ab40887099a73c988a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -145,7 +145,7 @@ template&lt;typename T &gt; </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab359cbd64078be42481c60270a9d3d0a" name="ab359cbd64078be42481c60270a9d3d0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab359cbd64078be42481c60270a9d3d0a">&#9670;&nbsp;</a></span>send() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab359cbd64078be42481c60270a9d3d0a">&#9670;&nbsp;</a></span>send()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,7 +170,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Copies and sends an item over the channel. </p>
+<p>Sends an item over the channel. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">item</td><td>The item being sent over the channel </td></tr>
@@ -180,45 +180,6 @@ template&lt;typename T &gt; </div>
 <dl class="section note"><dt>Note</dt><dd>May block if using a synchronous buffer </dd></dl>
 
 <p>Implements <a class="el" href="classpiper_1_1Sender.html#aa32fd4423301b9ab40887099a73c988a">piper::Sender&lt; T &gt;</a>.</p>
-
-</div>
-</div>
-<a id="a9b1181c86f32d0273a5c7ae476bdeda1" name="a9b1181c86f32d0273a5c7ae476bdeda1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b1181c86f32d0273a5c7ae476bdeda1">&#9670;&nbsp;</a></span>send() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classpiper_1_1spmc_1_1Sender.html">piper::spmc::Sender</a>&lt; T &gt;::send </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
-          <td class="paramname"><em>item</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Moves and sends an item over the channel. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">item</td><td>The item being sent over the channel </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>May block if using a synchronous buffer </dd></dl>
-
-<p>Implements <a class="el" href="classpiper_1_1Sender.html#a1a543916429ae328314d54bad85ebb03">piper::Sender&lt; T &gt;</a>.</p>
 
 </div>
 </div>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['channel_0',['channel',['../mpsc_8hpp.html#a0de309f2f79b3b68885745ae66b5ebe2',1,'piper::mpsc::channel()'],['../mpsc_8hpp.html#ae632d65e294c91eae8f3072e0f567a86',1,'piper::mpsc::channel(std::size_t n)'],['../spmc_8hpp.html#a3c44d150c7b8cd62c9d2da03bf8b685a',1,'piper::spmc::channel()'],['../spmc_8hpp.html#ae4a94f4bc1ddb4345fd0a90b515f07c6',1,'piper::spmc::channel(std::size_t n)']]]
+  ['boost_5fauto_5ftest_5fcase_0',['BOOST_AUTO_TEST_CASE',['../mpsc_8cpp.html#ada1172da6974818fd353713e4a6dc6d4',1,'BOOST_AUTO_TEST_CASE(expired):&#160;mpsc.cpp'],['../spmc_8cpp.html#ada1172da6974818fd353713e4a6dc6d4',1,'BOOST_AUTO_TEST_CASE(expired):&#160;spmc.cpp']]],
+  ['boost_5ffixture_5ftest_5fcase_1',['BOOST_FIXTURE_TEST_CASE',['../mpsc_8cpp.html#a4a5501a00e5fb91faabeff3e18959480',1,'BOOST_FIXTURE_TEST_CASE(one_sender, fixture):&#160;mpsc.cpp'],['../mpsc_8cpp.html#adfb68bc734f662a3cf58addaa3ed9c37',1,'BOOST_FIXTURE_TEST_CASE(five_senders, fixture):&#160;mpsc.cpp'],['../spmc_8cpp.html#ac69141f868ef914145493864777e813b',1,'BOOST_FIXTURE_TEST_CASE(one_receiver, fixture):&#160;spmc.cpp'],['../spmc_8cpp.html#a7a65b20f4ce3c55f0e8a01eaadcf8014',1,'BOOST_FIXTURE_TEST_CASE(five_receivers, fixture):&#160;spmc.cpp']]]
 ];

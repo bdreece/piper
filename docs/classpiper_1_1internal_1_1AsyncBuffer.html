@@ -95,14 +95,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4d8c70939c9e9f7afbe1d1d9e4239063"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an unbounded buffer. <br /></td></tr>
 <tr class="separator:a4d8c70939c9e9f7afbe1d1d9e4239063"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12cf01fc5d1897d20b4cbec016010aa1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1AsyncBuffer.html#a12cf01fc5d1897d20b4cbec016010aa1">push</a> (const T &amp;item) override</td></tr>
-<tr class="memdesc:a12cf01fc5d1897d20b4cbec016010aa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies and pushes an item into the buffer.  <a href="classpiper_1_1internal_1_1AsyncBuffer.html#a12cf01fc5d1897d20b4cbec016010aa1">More...</a><br /></td></tr>
+<tr class="memdesc:a12cf01fc5d1897d20b4cbec016010aa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes an item into the buffer.  <a href="classpiper_1_1internal_1_1AsyncBuffer.html#a12cf01fc5d1897d20b4cbec016010aa1">More...</a><br /></td></tr>
 <tr class="separator:a12cf01fc5d1897d20b4cbec016010aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58c503f940c2ad1c4ce333515e702041"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1AsyncBuffer.html#a58c503f940c2ad1c4ce333515e702041">push</a> (T &amp;&amp;item) override</td></tr>
-<tr class="memdesc:a58c503f940c2ad1c4ce333515e702041"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves and pushes a temporary item into the buffer.  <a href="classpiper_1_1internal_1_1AsyncBuffer.html#a58c503f940c2ad1c4ce333515e702041">More...</a><br /></td></tr>
-<tr class="separator:a58c503f940c2ad1c4ce333515e702041"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6ca5ccf4e64709a19ec0876ea5afbf4"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1AsyncBuffer.html#ac6ca5ccf4e64709a19ec0876ea5afbf4">pop</a> () override</td></tr>
 <tr class="memdesc:ac6ca5ccf4e64709a19ec0876ea5afbf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pops an item from the buffer.  <a href="classpiper_1_1internal_1_1AsyncBuffer.html#ac6ca5ccf4e64709a19ec0876ea5afbf4">More...</a><br /></td></tr>
 <tr class="separator:ac6ca5ccf4e64709a19ec0876ea5afbf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9115fd6309bf2d350f1798d22d073ea7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1Buffer.html#a9115fd6309bf2d350f1798d22d073ea7">push</a> (const T &amp;item)=0</td></tr>
+<tr class="memdesc:a9115fd6309bf2d350f1798d22d073ea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes an item into the buffer.  <a href="classpiper_1_1internal_1_1Buffer.html#a9115fd6309bf2d350f1798d22d073ea7">More...</a><br /></td></tr>
+<tr class="separator:a9115fd6309bf2d350f1798d22d073ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0db0815edcc46464edfb8b8abe0137cb"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1Buffer.html#a0db0815edcc46464edfb8b8abe0137cb">pop</a> ()=0</td></tr>
+<tr class="memdesc:a0db0815edcc46464edfb8b8abe0137cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pops an item from the buffer.  <a href="classpiper_1_1internal_1_1Buffer.html#a0db0815edcc46464edfb8b8abe0137cb">More...</a><br /></td></tr>
+<tr class="separator:a0db0815edcc46464edfb8b8abe0137cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -145,7 +148,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a12cf01fc5d1897d20b4cbec016010aa1" name="a12cf01fc5d1897d20b4cbec016010aa1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12cf01fc5d1897d20b4cbec016010aa1">&#9670;&nbsp;</a></span>push() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a12cf01fc5d1897d20b4cbec016010aa1">&#9670;&nbsp;</a></span>push()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,7 +173,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Copies and pushes an item into the buffer. </p>
+<p>Pushes an item into the buffer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">item</td><td>The item being pushed into the buffer </td></tr>
@@ -180,45 +183,6 @@ template&lt;typename T &gt; </div>
 <dl class="section note"><dt>Note</dt><dd>This method should not block </dd></dl>
 
 <p>Implements <a class="el" href="classpiper_1_1internal_1_1Buffer.html#a9115fd6309bf2d350f1798d22d073ea7">piper::internal::Buffer&lt; T &gt;</a>.</p>
-
-</div>
-</div>
-<a id="a58c503f940c2ad1c4ce333515e702041" name="a58c503f940c2ad1c4ce333515e702041"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58c503f940c2ad1c4ce333515e702041">&#9670;&nbsp;</a></span>push() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classpiper_1_1internal_1_1AsyncBuffer.html">piper::internal::AsyncBuffer</a>&lt; T &gt;::push </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
-          <td class="paramname"><em>item</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Moves and pushes a temporary item into the buffer. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">item</td><td>The item being pushed into the buffer </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>This method should not block </dd></dl>
-
-<p>Implements <a class="el" href="classpiper_1_1internal_1_1Buffer.html#a9068f5dab334f5bb491b2a7529a879c2">piper::internal::Buffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>

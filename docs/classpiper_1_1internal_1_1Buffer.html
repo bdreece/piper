@@ -93,11 +93,8 @@ Inheritance diagram for piper::internal::Buffer&lt; T &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9115fd6309bf2d350f1798d22d073ea7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1Buffer.html#a9115fd6309bf2d350f1798d22d073ea7">push</a> (const T &amp;item)=0</td></tr>
-<tr class="memdesc:a9115fd6309bf2d350f1798d22d073ea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies and pushes an item into the buffer.  <a href="classpiper_1_1internal_1_1Buffer.html#a9115fd6309bf2d350f1798d22d073ea7">More...</a><br /></td></tr>
+<tr class="memdesc:a9115fd6309bf2d350f1798d22d073ea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes an item into the buffer.  <a href="classpiper_1_1internal_1_1Buffer.html#a9115fd6309bf2d350f1798d22d073ea7">More...</a><br /></td></tr>
 <tr class="separator:a9115fd6309bf2d350f1798d22d073ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9068f5dab334f5bb491b2a7529a879c2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1Buffer.html#a9068f5dab334f5bb491b2a7529a879c2">push</a> (T &amp;&amp;item)=0</td></tr>
-<tr class="memdesc:a9068f5dab334f5bb491b2a7529a879c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves and pushes a temporary item into the buffer.  <a href="classpiper_1_1internal_1_1Buffer.html#a9068f5dab334f5bb491b2a7529a879c2">More...</a><br /></td></tr>
-<tr class="separator:a9068f5dab334f5bb491b2a7529a879c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0db0815edcc46464edfb8b8abe0137cb"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1Buffer.html#a0db0815edcc46464edfb8b8abe0137cb">pop</a> ()=0</td></tr>
 <tr class="memdesc:a0db0815edcc46464edfb8b8abe0137cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pops an item from the buffer.  <a href="classpiper_1_1internal_1_1Buffer.html#a0db0815edcc46464edfb8b8abe0137cb">More...</a><br /></td></tr>
 <tr class="separator:a0db0815edcc46464edfb8b8abe0137cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,7 +143,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a9115fd6309bf2d350f1798d22d073ea7" name="a9115fd6309bf2d350f1798d22d073ea7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9115fd6309bf2d350f1798d22d073ea7">&#9670;&nbsp;</a></span>push() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9115fd6309bf2d350f1798d22d073ea7">&#9670;&nbsp;</a></span>push()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,7 +168,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Copies and pushes an item into the buffer. </p>
+<p>Pushes an item into the buffer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">item</td><td>The item being pushed into the buffer </td></tr>
@@ -181,45 +178,6 @@ template&lt;typename T &gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Implementors of this virtual method may block. </dd></dl>
 
 <p>Implemented in <a class="el" href="classpiper_1_1internal_1_1AsyncBuffer.html#a12cf01fc5d1897d20b4cbec016010aa1">piper::internal::AsyncBuffer&lt; T &gt;</a>, <a class="el" href="classpiper_1_1internal_1_1SyncBuffer.html#a038bfc83291b55812d51135c497b0f4f">piper::internal::SyncBuffer&lt; T &gt;</a>, and <a class="el" href="classpiper_1_1internal_1_1RendezvousBuffer.html#aadb941ee138f928a9b29b7e5391aba8d">piper::internal::RendezvousBuffer&lt; T &gt;</a>.</p>
-
-</div>
-</div>
-<a id="a9068f5dab334f5bb491b2a7529a879c2" name="a9068f5dab334f5bb491b2a7529a879c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9068f5dab334f5bb491b2a7529a879c2">&#9670;&nbsp;</a></span>push() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void <a class="el" href="classpiper_1_1internal_1_1Buffer.html">piper::internal::Buffer</a>&lt; T &gt;::push </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
-          <td class="paramname"><em>item</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Moves and pushes a temporary item into the buffer. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">item</td><td>The item being pushed into the buffer </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>Implementors of this virtual method may block. </dd></dl>
-
-<p>Implemented in <a class="el" href="classpiper_1_1internal_1_1AsyncBuffer.html#a58c503f940c2ad1c4ce333515e702041">piper::internal::AsyncBuffer&lt; T &gt;</a>, <a class="el" href="classpiper_1_1internal_1_1SyncBuffer.html#a3d2969057c61feae360df7690eab5104">piper::internal::SyncBuffer&lt; T &gt;</a>, and <a class="el" href="classpiper_1_1internal_1_1RendezvousBuffer.html#a892a97a5020a04df5ab89c2115595f7a">piper::internal::RendezvousBuffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>

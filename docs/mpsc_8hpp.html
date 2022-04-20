@@ -96,14 +96,14 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0de309f2f79b3b68885745ae66b5ebe2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a0de309f2f79b3b68885745ae66b5ebe2"><td class="memTemplItemLeft" align="right" valign="top">std::tuple&lt; Sender&lt; T &gt; &amp;&amp;, Receiver&lt; T &gt; &amp;&amp; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="mpsc_8hpp.html#a0de309f2f79b3b68885745ae66b5ebe2">piper::mpsc::channel</a> ()</td></tr>
-<tr class="memdesc:a0de309f2f79b3b68885745ae66b5ebe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an asynchronous channel.  <a href="mpsc_8hpp.html#a0de309f2f79b3b68885745ae66b5ebe2">More...</a><br /></td></tr>
-<tr class="separator:a0de309f2f79b3b68885745ae66b5ebe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae632d65e294c91eae8f3072e0f567a86"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ae632d65e294c91eae8f3072e0f567a86"><td class="memTemplItemLeft" align="right" valign="top">std::tuple&lt; Sender&lt; T &gt; &amp;&amp;, Receiver&lt; T &gt; &amp;&amp; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="mpsc_8hpp.html#ae632d65e294c91eae8f3072e0f567a86">piper::mpsc::channel</a> (std::size_t n)</td></tr>
-<tr class="memdesc:ae632d65e294c91eae8f3072e0f567a86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a synchronous channel.  <a href="mpsc_8hpp.html#ae632d65e294c91eae8f3072e0f567a86">More...</a><br /></td></tr>
-<tr class="separator:ae632d65e294c91eae8f3072e0f567a86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0f6ca9a05c5eaa5c3b39124298001dd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae0f6ca9a05c5eaa5c3b39124298001dd"><td class="memTemplItemLeft" align="right" valign="top">std::tuple&lt; Sender&lt; T &gt;, Receiver&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="mpsc_8hpp.html#ae0f6ca9a05c5eaa5c3b39124298001dd">piper::mpsc::channel</a> ()</td></tr>
+<tr class="memdesc:ae0f6ca9a05c5eaa5c3b39124298001dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an asynchronous channel.  <a href="mpsc_8hpp.html#ae0f6ca9a05c5eaa5c3b39124298001dd">More...</a><br /></td></tr>
+<tr class="separator:ae0f6ca9a05c5eaa5c3b39124298001dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01bf6e57b3ffa58aa1035c82939b8176"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a01bf6e57b3ffa58aa1035c82939b8176"><td class="memTemplItemLeft" align="right" valign="top">std::tuple&lt; Sender&lt; T &gt;, Receiver&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="mpsc_8hpp.html#a01bf6e57b3ffa58aa1035c82939b8176">piper::mpsc::channel</a> (std::size_t n)</td></tr>
+<tr class="memdesc:a01bf6e57b3ffa58aa1035c82939b8176"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a synchronous channel.  <a href="mpsc_8hpp.html#a01bf6e57b3ffa58aa1035c82939b8176">More...</a><br /></td></tr>
+<tr class="separator:a01bf6e57b3ffa58aa1035c82939b8176"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Multiple producer, single consumer channel. </p>
@@ -117,8 +117,8 @@ Functions</h2></td></tr>
 <dl class="section copyright"><dt>Copyright</dt><dd>MIT License </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2022-04-18 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a0de309f2f79b3b68885745ae66b5ebe2" name="a0de309f2f79b3b68885745ae66b5ebe2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0de309f2f79b3b68885745ae66b5ebe2">&#9670;&nbsp;</a></span>channel() <span class="overload">[1/2]</span></h2>
+<a id="ae0f6ca9a05c5eaa5c3b39124298001dd" name="ae0f6ca9a05c5eaa5c3b39124298001dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0f6ca9a05c5eaa5c3b39124298001dd">&#9670;&nbsp;</a></span>channel() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -126,7 +126,7 @@ Functions</h2></td></tr>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::tuple&lt; Sender&lt; T &gt; &amp;&amp;, Receiver&lt; T &gt; &amp;&amp; &gt; piper::mpsc::channel </td>
+          <td class="memname">std::tuple&lt; Sender&lt; T &gt;, Receiver&lt; T &gt; &gt; piper::mpsc::channel </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -139,8 +139,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ae632d65e294c91eae8f3072e0f567a86" name="ae632d65e294c91eae8f3072e0f567a86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae632d65e294c91eae8f3072e0f567a86">&#9670;&nbsp;</a></span>channel() <span class="overload">[2/2]</span></h2>
+<a id="a01bf6e57b3ffa58aa1035c82939b8176" name="a01bf6e57b3ffa58aa1035c82939b8176"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01bf6e57b3ffa58aa1035c82939b8176">&#9670;&nbsp;</a></span>channel() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,7 +148,7 @@ template&lt;typename T &gt; </div>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::tuple&lt; Sender&lt; T &gt; &amp;&amp;, Receiver&lt; T &gt; &amp;&amp; &gt; piper::mpsc::channel </td>
+          <td class="memname">std::tuple&lt; Sender&lt; T &gt;, Receiver&lt; T &gt; &gt; piper::mpsc::channel </td>
           <td>(</td>
           <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>n</em></td><td>)</td>
