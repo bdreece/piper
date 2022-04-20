@@ -1,5 +1,5 @@
 # CMake and Clang cache
-.cache/*
+.cache/
 
 # Build directory
-build/*
+build/
