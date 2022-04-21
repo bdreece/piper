@@ -54,8 +54,8 @@ namespace piper::internal {
              * @param item The item being pushed into the buffer
              * @note Implementors of this virtual method may block.
              */
-            virtual void push(const T &item) = 0;
-            virtual void push(T &&item) = 0;
+            virtual void push(const T& item) = 0;
+            virtual void push(T&& item) = 0;
 
             /**
              * @brief Pops an item from the buffer
@@ -80,16 +80,16 @@ namespace piper::internal {
              * @brief Creates an unbounded buffer
              */
             AsyncBuffer() = default;
-            AsyncBuffer(const AsyncBuffer<T> &) = delete;
-            AsyncBuffer(AsyncBuffer<T> &&) = delete;
+            AsyncBuffer(const AsyncBuffer<T>&) = delete;
+            AsyncBuffer(AsyncBuffer<T>&&) = delete;
 
             /**
              * @brief Pushes an item into the buffer
              * @param item The item being pushed into the buffer
              * @note This method should not block
              */
-            void push(const T &item) override;
-            void push(T &&item) override;
+            void push(const T& item) override;
+            void push(T&& item) override;
 
             /**
              * @brief Pops an item from the buffer
@@ -120,16 +120,16 @@ namespace piper::internal {
              */
             SyncBuffer(std::size_t n) : Buffer<T>(), n(n){};
             SyncBuffer() = delete;
-            SyncBuffer(const SyncBuffer<T> &) = delete;
-            SyncBuffer(SyncBuffer<T> &&) = delete;
+            SyncBuffer(const SyncBuffer<T>&) = delete;
+            SyncBuffer(SyncBuffer<T>&&) = delete;
 
             /**
              * @brief Pushes an item into the buffer
              * @param item The item being pushed into the buffer
              * @note Blocks on a full buffer
              */
-            virtual void push(const T &item) override;
-            virtual void push(T &&item) override;
+            virtual void push(const T& item) override;
+            virtual void push(T&& item) override;
 
             /**
              * @brief Pops an item from the buffer
@@ -156,16 +156,16 @@ namespace piper::internal {
              * @brief Creates a rendezvous buffer
              */
             RendezvousBuffer() : SyncBuffer<T>(0), ready(true){};
-            RendezvousBuffer(const RendezvousBuffer<T> &) = delete;
-            RendezvousBuffer(RendezvousBuffer<T> &&) = delete;
+            RendezvousBuffer(const RendezvousBuffer<T>&) = delete;
+            RendezvousBuffer(RendezvousBuffer<T>&&) = delete;
 
             /**
              * @brief Pushes an item into the buffer
              * @param item The item being pushed into the buffer
              * @note Blocks awaiting a call to pop()
              */
-            void push(const T &item) override;
-            void push(T &&item) override;
+            void push(const T& item) override;
+            void push(T&& item) override;
 
             /**
              * @brief Pops an item from the buffer
@@ -175,7 +175,7 @@ namespace piper::internal {
             T pop() override;
     };
 
-    template <typename T> void AsyncBuffer<T>::push(const T &item) {
+    template <typename T> void AsyncBuffer<T>::push(const T& item) {
         {
             // Acquire lock
             std::unique_lock<std::mutex> lock(this->mutex);
@@ -187,7 +187,7 @@ namespace piper::internal {
         this->available.notify_one();
     }
 
-    template <typename T> void AsyncBuffer<T>::push(T &&item) {
+    template <typename T> void AsyncBuffer<T>::push(T&& item) {
         {
             // Acquire lock
             std::unique_lock<std::mutex> lock(this->mutex);
@@ -215,7 +215,7 @@ namespace piper::internal {
         return item;
     }
 
-    template <typename T> void SyncBuffer<T>::push(const T &item) {
+    template <typename T> void SyncBuffer<T>::push(const T& item) {
         {
             // Acquire lock
             std::unique_lock<std::mutex> lock(this->mutex);
@@ -231,7 +231,7 @@ namespace piper::internal {
         this->available[0].notify_one();
     }
 
-    template <typename T> void SyncBuffer<T>::push(T &&item) {
+    template <typename T> void SyncBuffer<T>::push(T&& item) {
         {
             // Acquire lock
             std::unique_lock<std::mutex> lock(this->mutex);
@@ -267,7 +267,7 @@ namespace piper::internal {
         return item;
     }
 
-    template <typename T> void RendezvousBuffer<T>::push(const T &item) {
+    template <typename T> void RendezvousBuffer<T>::push(const T& item) {
         {
             // Acquire lock
             std::unique_lock<std::mutex> lock(this->mutex);
@@ -286,7 +286,7 @@ namespace piper::internal {
         this->available[0].notify_one();
     }
 
-    template <typename T> void RendezvousBuffer<T>::push(T &&item) {
+    template <typename T> void RendezvousBuffer<T>::push(T&& item) {
         {
             // Acquire lock
             std::unique_lock<std::mutex> lock(this->mutex);

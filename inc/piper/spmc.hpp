@@ -54,9 +54,9 @@ namespace piper::spmc {
              * @brief Creates a Receiver from a Sender
              * @param tx The connected Sender
              */
-            Receiver(const Sender<T> &tx) : buffer{tx.buffer} {}
-            Receiver(const Receiver<T> &) = default;
-            Receiver(Receiver<T> &&) = default;
+            Receiver(const Sender<T>& tx) : buffer{tx.buffer} {}
+            Receiver(const Receiver<T>&) = default;
+            Receiver(Receiver<T>&&) = default;
             Receiver() = delete;
 
             /**
@@ -92,16 +92,16 @@ namespace piper::spmc {
              * @note 	A size of zero represents a rendezvous channel
              */
             Sender(std::size_t n);
-            Sender(Sender<T> &&) = default;
-            Sender(const Sender<T> &) = delete;
+            Sender(Sender<T>&&) = default;
+            Sender(const Sender<T>&) = delete;
 
             /**
              * @brief Sends an item over the channel
              * @param item The item being sent over the channel
              * @note  May block if using a synchronous buffer
              */
-            void send(const T &item) override;
-            void send(T &&item) override;
+            void send(const T& item) override;
+            void send(T&& item) override;
     };
 
     /**
@@ -147,11 +147,11 @@ namespace piper::spmc {
         }
     }
 
-    template <typename T> void Sender<T>::send(const T &item) {
+    template <typename T> void Sender<T>::send(const T& item) {
         buffer->push(item);
     }
 
-    template <typename T> void Sender<T>::send(T &&item) {
+    template <typename T> void Sender<T>::send(T&& item) {
         buffer->push(std::forward<T>(item));
     }
 } // namespace piper::spmc

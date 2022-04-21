@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(expired) {
     delete tx;
     try {
         int val = rx.recv();
-    } catch (const std::runtime_error &e) {
+    } catch (const std::runtime_error& e) {
         BOOST_TEST(e.what() == "sender is expired");
     }
 }
@@ -79,7 +79,7 @@ struct fixture {
  */
 BOOST_FIXTURE_TEST_CASE(one_receiver, fixture) {
     std::thread worker(
-        [](auto &&rx) {
+        [](auto&& rx) {
             for (int i = 0; i < 5; i++) {
                 int j;
                 BOOST_TEST(rx.recv() == i);

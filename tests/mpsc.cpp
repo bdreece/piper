@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(expired) {
     delete rx;
     try {
         tx.send(1);
-    } catch (const std::runtime_error &e) {
+    } catch (const std::runtime_error& e) {
         BOOST_TEST(e.what() == "receiver is expired");
     }
 }
@@ -85,7 +85,7 @@ struct fixture {
 BOOST_FIXTURE_TEST_CASE(one_sender, fixture) {
     using namespace piper::mpsc;
     std::thread worker(
-        [](auto &&tx) {
+        [](auto&& tx) {
             for (int i = 0; i < 5; i++) {
                 tx << i;
             }
@@ -113,7 +113,7 @@ BOOST_FIXTURE_TEST_CASE(five_senders, fixture) {
         BOOST_TEST(rx->recv() == 1);
     }
 
-    std::for_each(workers.begin(), workers.end(), [](auto &tx) { tx.join(); });
+    std::for_each(workers.begin(), workers.end(), [](auto& tx) { tx.join(); });
 }
 
 BOOST_AUTO_TEST_SUITE_END() // mpsc_async

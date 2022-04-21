@@ -65,8 +65,8 @@ namespace piper::mpsc {
              * @note A size of zero represents a rendezvous channel
              */
             Receiver(std::size_t n);
-            Receiver(Receiver<T> &&) = default;
-            Receiver(const Receiver<T> &) = delete;
+            Receiver(Receiver<T>&&) = default;
+            Receiver(const Receiver<T>&) = delete;
 
             /**
              * @brief Receives an item from the channel
@@ -90,13 +90,13 @@ namespace piper::mpsc {
              * @brief Creates a new Sender from a Receiver
              * @param rx The connected receiver
              */
-            Sender(const Receiver<T> &rx) : buffer{rx.buffer} {}
+            Sender(const Receiver<T>& rx) : buffer{rx.buffer} {}
             /**
              * @brief Clones a sender
              * @param tx The sender to clone
              */
-            Sender(const Sender<T> &tx) = default;
-            Sender(Sender<T> &&) = default;
+            Sender(const Sender<T>& tx) = default;
+            Sender(Sender<T>&&) = default;
             Sender() = delete;
 
             /**
@@ -106,8 +106,8 @@ namespace piper::mpsc {
              * 		   no longer exists.
              * @note Blocks if using a synchronous buffer
              */
-            void send(const T &item) noexcept(false) override;
-            void send(T &&item) noexcept(false) override;
+            void send(const T& item) noexcept(false) override;
+            void send(T&& item) noexcept(false) override;
     };
 
     /**
@@ -149,13 +149,13 @@ namespace piper::mpsc {
 
     template <typename T> T Receiver<T>::recv() { return buffer->pop(); }
 
-    template <typename T> void Sender<T>::send(const T &item) {
+    template <typename T> void Sender<T>::send(const T& item) {
         if (buffer.expired())
             throw std::runtime_error("receiver is expired");
         buffer.lock()->push(item);
     }
 
-    template <typename T> void Sender<T>::send(T &&item) {
+    template <typename T> void Sender<T>::send(T&& item) {
         if (buffer.expired())
             throw std::runtime_error("receiver is expired");
         buffer.lock()->push(std::forward<T>(item));
