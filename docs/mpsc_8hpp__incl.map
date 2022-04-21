@@ -1,0 +1,13 @@
+<map id="inc/piper/mpsc.hpp" name="inc/piper/mpsc.hpp">
+<area shape="rect" id="node1" title="Multiple producer, single consumer channel." alt="" coords="166,5,297,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,155,73,181"/>
+<area shape="rect" id="node3" title=" " alt="" coords="475,80,553,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="101,155,151,181"/>
+<area shape="rect" id="node5" title=" " alt="" coords="187,155,239,181"/>
+<area shape="rect" id="node6" href="$buffer_8hpp.html" title="Shared channel buffer base class and derivations." alt="" coords="295,80,451,107"/>
+<area shape="rect" id="node11" href="$piper_8hpp_source.html" title=" " alt="" coords="62,80,169,107"/>
+<area shape="rect" id="node7" title=" " alt="" coords="517,155,644,181"/>
+<area shape="rect" id="node8" title=" " alt="" coords="263,155,320,181"/>
+<area shape="rect" id="node9" title=" " alt="" coords="344,155,401,181"/>
+<area shape="rect" id="node10" title=" " alt="" coords="426,155,493,181"/>
+</map>

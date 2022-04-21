@@ -1,0 +1,13 @@
+<map id="inc/piper/spmc.hpp" name="inc/piper/spmc.hpp">
+<area shape="rect" id="node1" title="Single producer, multiple consumer channel implementation." alt="" coords="404,5,535,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="582,155,650,181"/>
+<area shape="rect" id="node3" title=" " alt="" coords="371,80,450,107"/>
+<area shape="rect" id="node4" href="$buffer_8hpp.html" title="Shared channel buffer base class and derivations." alt="" coords="191,80,347,107"/>
+<area shape="rect" id="node10" href="$piper_8hpp_source.html" title=" " alt="" coords="475,80,581,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="97,155,223,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="247,155,305,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="329,155,386,181"/>
+<area shape="rect" id="node8" title=" " alt="" coords="5,155,72,181"/>
+<area shape="rect" id="node9" title=" " alt="" coords="421,155,473,181"/>
+<area shape="rect" id="node11" title=" " alt="" coords="503,155,553,181"/>
+</map>

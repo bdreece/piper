@@ -84,16 +84,22 @@ $(function() {
 <code>#include &lt;tuple&gt;</code><br />
 <code>#include &lt;boost/test/unit_test.hpp&gt;</code><br />
 <code>#include &quot;<a class="el" href="mpsc_8hpp_source.html">piper/mpsc.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for mpsc.cpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="mpsc_8cpp__incl.png" border="0" usemap="#atests_2mpsc_8cpp" alt=""/></div>
+<!-- MAP 0 -->
+</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ada1172da6974818fd353713e4a6dc6d4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mpsc_8cpp.html#ada1172da6974818fd353713e4a6dc6d4">BOOST_AUTO_TEST_CASE</a> (expired)</td></tr>
 <tr class="memdesc:ada1172da6974818fd353713e4a6dc6d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asserts that tx.send() throws exception after rx is destroyed.  <a href="mpsc_8cpp.html#ada1172da6974818fd353713e4a6dc6d4">More...</a><br /></td></tr>
 <tr class="separator:ada1172da6974818fd353713e4a6dc6d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a5501a00e5fb91faabeff3e18959480"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mpsc_8cpp.html#a4a5501a00e5fb91faabeff3e18959480">BOOST_FIXTURE_TEST_CASE</a> (one_sender, <a class="el" href="structfixture.html">fixture</a>)</td></tr>
+<tr class="memitem:a4a5501a00e5fb91faabeff3e18959480"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mpsc_8cpp.html#a4a5501a00e5fb91faabeff3e18959480">BOOST_FIXTURE_TEST_CASE</a> (one_sender, fixture)</td></tr>
 <tr class="memdesc:a4a5501a00e5fb91faabeff3e18959480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asserts that one sender can send one receiver five integers over the channel to the receiver.  <a href="mpsc_8cpp.html#a4a5501a00e5fb91faabeff3e18959480">More...</a><br /></td></tr>
 <tr class="separator:a4a5501a00e5fb91faabeff3e18959480"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfb68bc734f662a3cf58addaa3ed9c37"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mpsc_8cpp.html#adfb68bc734f662a3cf58addaa3ed9c37">BOOST_FIXTURE_TEST_CASE</a> (five_senders, <a class="el" href="structfixture.html">fixture</a>)</td></tr>
+<tr class="memitem:adfb68bc734f662a3cf58addaa3ed9c37"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mpsc_8cpp.html#adfb68bc734f662a3cf58addaa3ed9c37">BOOST_FIXTURE_TEST_CASE</a> (five_senders, fixture)</td></tr>
 <tr class="memdesc:adfb68bc734f662a3cf58addaa3ed9c37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asserts that five senders can send one receiver five integers over the channel.  <a href="mpsc_8cpp.html#adfb68bc734f662a3cf58addaa3ed9c37">More...</a><br /></td></tr>
 <tr class="separator:adfb68bc734f662a3cf58addaa3ed9c37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -126,7 +132,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Asserts that tx.send() throws exception after rx is destroyed. </p>
-<dl class="test"><dt><b><a class="el" href="test.html#_test000002">Test:</a></b></dt><dd>mpsc_exceptions/expired </dd></dl>
+<dl class="test"><dt><b><a class="el" href="test.html#_test000001">Test:</a></b></dt><dd>mpsc_exceptions/expired </dd></dl>
 
 </div>
 </div>
@@ -145,7 +151,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structfixture.html">fixture</a>&#160;</td>
+          <td class="paramtype">fixture&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -157,7 +163,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Asserts that five senders can send one receiver five integers over the channel. </p>
-<dl class="test"><dt><b><a class="el" href="test.html#_test000006">Test:</a></b></dt><dd>mpsc_async/five_senders </dd></dl>
+<dl class="test"><dt><b><a class="el" href="test.html#_test000003">Test:</a></b></dt><dd>mpsc_async/five_senders </dd></dl>
 
 </div>
 </div>
@@ -176,7 +182,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structfixture.html">fixture</a>&#160;</td>
+          <td class="paramtype">fixture&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -188,7 +194,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Asserts that one sender can send one receiver five integers over the channel to the receiver. </p>
-<dl class="test"><dt><b><a class="el" href="test.html#_test000004">Test:</a></b></dt><dd>one_sender </dd></dl>
+<dl class="test"><dt><b><a class="el" href="test.html#_test000002">Test:</a></b></dt><dd>one_sender </dd></dl>
 
 </div>
 </div>

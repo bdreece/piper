@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>piper</b></li><li class="navelem"><b>internal</b></li><li class="navelem"><a class="el" href="classpiper_1_1internal_1_1SyncBuffer.html">SyncBuffer</a></li>  </ul>
+<li class="navelem"><b>piper</b></li><li class="navelem"><a class="el" href="namespacepiper_1_1internal.html">internal</a></li><li class="navelem"><a class="el" href="classpiper_1_1internal_1_1SyncBuffer.html">SyncBuffer</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -81,38 +81,43 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for piper::internal::SyncBuffer&lt; T &gt;:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classpiper_1_1internal_1_1SyncBuffer.png" usemap="#piper::internal::SyncBuffer_3C_20T_20_3E_map" alt=""/>
-  <map id="piper::internal::SyncBuffer_3C_20T_20_3E_map" name="piper::internal::SyncBuffer_3C_20T_20_3E_map">
-<area href="classpiper_1_1internal_1_1Buffer.html" title="Shared channel buffer base class." alt="piper::internal::Buffer&lt; T &gt;" shape="rect" coords="0,0,230,24"/>
-<area href="classpiper_1_1internal_1_1RendezvousBuffer.html" title="A synchronous, rendezvous buffer." alt="piper::internal::RendezvousBuffer&lt; T &gt;" shape="rect" coords="0,112,230,136"/>
-  </map>
-</div></div>
+<div class="center"><img src="classpiper_1_1internal_1_1SyncBuffer__inherit__graph.png" border="0" usemap="#apiper_1_1internal_1_1SyncBuffer_3_01T_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="apiper_1_1internal_1_1SyncBuffer_3_01T_01_4_inherit__map" id="apiper_1_1internal_1_1SyncBuffer_3_01T_01_4_inherit__map">
+<area shape="rect" title="A synchronous, bounded buffer." alt="" coords="5,80,203,107"/>
+<area shape="rect" href="classpiper_1_1internal_1_1Buffer.html" title="Shared channel buffer base class." alt="" coords="20,5,188,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for piper::internal::SyncBuffer&lt; T &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classpiper_1_1internal_1_1SyncBuffer__coll__graph.png" border="0" usemap="#apiper_1_1internal_1_1SyncBuffer_3_01T_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="apiper_1_1internal_1_1SyncBuffer_3_01T_01_4_coll__map" id="apiper_1_1internal_1_1SyncBuffer_3_01T_01_4_coll__map">
+<area shape="rect" title="A synchronous, bounded buffer." alt="" coords="5,80,203,107"/>
+<area shape="rect" href="classpiper_1_1internal_1_1Buffer.html" title="Shared channel buffer base class." alt="" coords="20,5,188,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a40fef0f87ce0f21f4727b382f1a72781"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1SyncBuffer.html#a40fef0f87ce0f21f4727b382f1a72781">SyncBuffer</a> (std::size_t n)</td></tr>
-<tr class="memdesc:a40fef0f87ce0f21f4727b382f1a72781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a bounded buffer.  <a href="classpiper_1_1internal_1_1SyncBuffer.html#a40fef0f87ce0f21f4727b382f1a72781">More...</a><br /></td></tr>
+<tr class="memdesc:a40fef0f87ce0f21f4727b382f1a72781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a synchronous buffer.  <a href="classpiper_1_1internal_1_1SyncBuffer.html#a40fef0f87ce0f21f4727b382f1a72781">More...</a><br /></td></tr>
 <tr class="separator:a40fef0f87ce0f21f4727b382f1a72781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a038bfc83291b55812d51135c497b0f4f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1SyncBuffer.html#a038bfc83291b55812d51135c497b0f4f">push</a> (const T &amp;item) override</td></tr>
-<tr class="memdesc:a038bfc83291b55812d51135c497b0f4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes an item into the buffer.  <a href="classpiper_1_1internal_1_1SyncBuffer.html#a038bfc83291b55812d51135c497b0f4f">More...</a><br /></td></tr>
+<tr class="memdesc:a038bfc83291b55812d51135c497b0f4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies and pushes an item into the buffer.  <a href="classpiper_1_1internal_1_1SyncBuffer.html#a038bfc83291b55812d51135c497b0f4f">More...</a><br /></td></tr>
 <tr class="separator:a038bfc83291b55812d51135c497b0f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d2969057c61feae360df7690eab5104"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1SyncBuffer.html#a3d2969057c61feae360df7690eab5104">push</a> (T &amp;&amp;item) override</td></tr>
+<tr class="memdesc:a3d2969057c61feae360df7690eab5104"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves and pushes an item into the buffer.  <a href="classpiper_1_1internal_1_1SyncBuffer.html#a3d2969057c61feae360df7690eab5104">More...</a><br /></td></tr>
+<tr class="separator:a3d2969057c61feae360df7690eab5104"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaea0425e1179531e252e158b88a9413d"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1SyncBuffer.html#aaea0425e1179531e252e158b88a9413d">pop</a> () override</td></tr>
 <tr class="memdesc:aaea0425e1179531e252e158b88a9413d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pops an item from the buffer.  <a href="classpiper_1_1internal_1_1SyncBuffer.html#aaea0425e1179531e252e158b88a9413d">More...</a><br /></td></tr>
 <tr class="separator:aaea0425e1179531e252e158b88a9413d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9115fd6309bf2d350f1798d22d073ea7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1Buffer.html#a9115fd6309bf2d350f1798d22d073ea7">push</a> (const T &amp;item)=0</td></tr>
-<tr class="memdesc:a9115fd6309bf2d350f1798d22d073ea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes an item into the buffer.  <a href="classpiper_1_1internal_1_1Buffer.html#a9115fd6309bf2d350f1798d22d073ea7">More...</a><br /></td></tr>
-<tr class="separator:a9115fd6309bf2d350f1798d22d073ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0db0815edcc46464edfb8b8abe0137cb"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1Buffer.html#a0db0815edcc46464edfb8b8abe0137cb">pop</a> ()=0</td></tr>
-<tr class="memdesc:a0db0815edcc46464edfb8b8abe0137cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pops an item from the buffer.  <a href="classpiper_1_1internal_1_1Buffer.html#a0db0815edcc46464edfb8b8abe0137cb">More...</a><br /></td></tr>
-<tr class="separator:a0db0815edcc46464edfb8b8abe0137cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class piper::internal::SyncBuffer&lt; T &gt;</div><p >A synchronous, bounded buffer. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>The type of item stored in the buffer &lt;T&gt; </td></tr>
+    <tr><td class="paramname">T</td><td>The type of item stored in the buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -143,14 +148,15 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Creates a bounded buffer. </p>
+<p>Constructs a synchronous buffer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">n</td><td>The size of the buffer </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>The size of the buffer should be at least 1. A synchronous buffer of size 0 is implemented as RendezvousBuffer&lt;T&gt; </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The size of the buffer should be at least 1. If an unbuffered channel is desired, use <a class="el" href="classpiper_1_1internal_1_1RendezvousBuffer.html" title="A synchronous, rendezvous buffer.">RendezvousBuffer</a>. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Passing n = 0 to this constructor may result in undefined behavior </dd></dl>
 
 </div>
 </div>
@@ -183,12 +189,10 @@ template&lt;typename T &gt; </div>
 
 <p>Implements <a class="el" href="classpiper_1_1internal_1_1Buffer.html#a0db0815edcc46464edfb8b8abe0137cb">piper::internal::Buffer&lt; T &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classpiper_1_1internal_1_1RendezvousBuffer.html#a7c349fc658ddacc4bd0ae06aea7359a6">piper::internal::RendezvousBuffer&lt; T &gt;</a>.</p>
-
 </div>
 </div>
 <a id="a038bfc83291b55812d51135c497b0f4f" name="a038bfc83291b55812d51135c497b0f4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a038bfc83291b55812d51135c497b0f4f">&#9670;&nbsp;</a></span>push()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a038bfc83291b55812d51135c497b0f4f">&#9670;&nbsp;</a></span>push() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -213,18 +217,55 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Pushes an item into the buffer. </p>
+<p>Copies and pushes an item into the buffer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">item</td><td>The item being pushed into the buffer </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Blocks on a full buffer </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This implementation should not block </dd></dl>
 
 <p>Implements <a class="el" href="classpiper_1_1internal_1_1Buffer.html#a9115fd6309bf2d350f1798d22d073ea7">piper::internal::Buffer&lt; T &gt;</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classpiper_1_1internal_1_1RendezvousBuffer.html#aadb941ee138f928a9b29b7e5391aba8d">piper::internal::RendezvousBuffer&lt; T &gt;</a>.</p>
+</div>
+</div>
+<a id="a3d2969057c61feae360df7690eab5104" name="a3d2969057c61feae360df7690eab5104"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d2969057c61feae360df7690eab5104">&#9670;&nbsp;</a></span>push() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classpiper_1_1internal_1_1SyncBuffer.html">piper::internal::SyncBuffer</a>&lt; T &gt;::push </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>item</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Moves and pushes an item into the buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">item</td><td>The item being pushed into the buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This implementation should not block </dd></dl>
+
+<p>Implements <a class="el" href="classpiper_1_1internal_1_1Buffer.html#a9068f5dab334f5bb491b2a7529a879c2">piper::internal::Buffer&lt; T &gt;</a>.</p>
 
 </div>
 </div>

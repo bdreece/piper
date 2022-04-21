@@ -68,7 +68,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">buffer.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -78,7 +79,33 @@ $(function() {
 <div class="textblock"><code>#include &lt;condition_variable&gt;</code><br />
 <code>#include &lt;deque&gt;</code><br />
 <code>#include &lt;mutex&gt;</code><br />
+<code>#include &lt;optional&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for buffer.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="buffer_8hpp__incl.png" border="0" usemap="#ainc_2piper_2internal_2buffer_8hpp" alt=""/></div>
+<map name="ainc_2piper_2internal_2buffer_8hpp" id="ainc_2piper_2internal_2buffer_8hpp">
+<area shape="rect" title="Shared channel buffer base class and derivations." alt="" coords="207,5,325,47"/>
+<area shape="rect" title=" " alt="" coords="5,95,132,121"/>
+<area shape="rect" title=" " alt="" coords="156,95,213,121"/>
+<area shape="rect" title=" " alt="" coords="237,95,295,121"/>
+<area shape="rect" title=" " alt="" coords="319,95,386,121"/>
+<area shape="rect" title=" " alt="" coords="411,95,463,121"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="buffer_8hpp__dep__incl.png" border="0" usemap="#ainc_2piper_2internal_2buffer_8hppdep" alt=""/></div>
+<map name="ainc_2piper_2internal_2buffer_8hppdep" id="ainc_2piper_2internal_2buffer_8hppdep">
+<area shape="rect" title="Shared channel buffer base class and derivations." alt="" coords="89,5,207,47"/>
+<area shape="rect" href="mpsc_8hpp.html" title="Multiple producer, single consumer channel." alt="" coords="5,95,136,121"/>
+<area shape="rect" href="spmc_8hpp.html" title="Single producer, multiple consumer channel implementation." alt="" coords="160,95,291,121"/>
+<area shape="rect" href="mpsc_8cpp.html" title="MPSC testing suite." alt="" coords="15,169,126,196"/>
+<area shape="rect" href="spmc_8cpp.html" title="SPMC testing suite." alt="" coords="170,169,281,196"/>
+</map>
+</div>
 </div>
 <p><a href="buffer_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -95,6 +122,12 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1internal_1_1RendezvousBuffer.html">piper::internal::RendezvousBuffer&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A synchronous, rendezvous buffer.  <a href="classpiper_1_1internal_1_1RendezvousBuffer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacepiper_1_1internal"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepiper_1_1internal.html">piper::internal</a></td></tr>
+<tr class="memdesc:namespacepiper_1_1internal"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpiper_1_1Channel.html" title="A bidirectional channel interface.">Channel</a> inner buffer interface and implementations. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

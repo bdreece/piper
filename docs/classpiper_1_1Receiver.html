@@ -77,23 +77,36 @@ $(function() {
 <p>The interface for channel receivers.  
  <a href="classpiper_1_1Receiver.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="channel_8hpp_source.html">channel.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="piper_8hpp_source.html">piper.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for piper::Receiver&lt; T &gt;:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classpiper_1_1Receiver.png" usemap="#piper::Receiver_3C_20T_20_3E_map" alt=""/>
-  <map id="piper::Receiver_3C_20T_20_3E_map" name="piper::Receiver_3C_20T_20_3E_map">
-<area href="classpiper_1_1mpsc_1_1Receiver.html" title="MPSC receiver." alt="piper::mpsc::Receiver&lt; T &gt;" shape="rect" coords="0,56,164,80"/>
-<area href="classpiper_1_1spmc_1_1Receiver.html" title="SPMC receiver." alt="piper::spmc::Receiver&lt; T &gt;" shape="rect" coords="174,56,338,80"/>
-  </map>
-</div></div>
+<div class="center"><img src="classpiper_1_1Receiver__inherit__graph.png" border="0" usemap="#apiper_1_1Receiver_3_01T_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="apiper_1_1Receiver_3_01T_01_4_inherit__map" id="apiper_1_1Receiver_3_01T_01_4_inherit__map">
+<area shape="rect" title="The interface for channel receivers." alt="" coords="298,5,435,32"/>
+<area shape="rect" href="classpiper_1_1Channel.html" title="A bidirectional channel interface." alt="" coords="121,80,255,107"/>
+<area shape="rect" href="classpiper_1_1mpsc_1_1Receiver.html" title="MPSC channel receiver." alt="" coords="279,80,454,107"/>
+<area shape="rect" href="classpiper_1_1spmc_1_1Receiver.html" title="SPMC channel receiver." alt="" coords="478,80,653,107"/>
+<area shape="rect" href="classpiper_1_1mpsc_1_1Channel.html" title="A multiple producer, single consumer channel." alt="" coords="5,155,176,181"/>
+<area shape="rect" href="classpiper_1_1spmc_1_1Channel.html" title="A single producer, multiple consumer channel." alt="" coords="200,155,371,181"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a3c2b1e4289fbbc262c20c900796c56c7"><td class="memItemLeft" align="right" valign="top"><a id="a3c2b1e4289fbbc262c20c900796c56c7" name="a3c2b1e4289fbbc262c20c900796c56c7"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~Receiver</b> ()</td></tr>
+<tr class="memdesc:a3c2b1e4289fbbc262c20c900796c56c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs a <a class="el" href="classpiper_1_1Receiver.html" title="The interface for channel receivers.">Receiver</a>. <br /></td></tr>
+<tr class="separator:a3c2b1e4289fbbc262c20c900796c56c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb0704cbf1d6200d6f1e0d280fcc0248"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Receiver.html#adb0704cbf1d6200d6f1e0d280fcc0248">recv</a> ()=0</td></tr>
 <tr class="memdesc:adb0704cbf1d6200d6f1e0d280fcc0248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives an item from the channel.  <a href="classpiper_1_1Receiver.html#adb0704cbf1d6200d6f1e0d280fcc0248">More...</a><br /></td></tr>
 <tr class="separator:adb0704cbf1d6200d6f1e0d280fcc0248"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cc8fc51133ce8422dd7575e7861d01f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpiper_1_1Receiver.html">Receiver</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Receiver.html#a8cc8fc51133ce8422dd7575e7861d01f">operator&gt;&gt;</a> (T &amp;item)</td></tr>
+<tr class="memdesc:a8cc8fc51133ce8422dd7575e7861d01f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies item from channel.  <a href="classpiper_1_1Receiver.html#a8cc8fc51133ce8422dd7575e7861d01f">More...</a><br /></td></tr>
+<tr class="separator:a8cc8fc51133ce8422dd7575e7861d01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71e8ce1b34f1c5b3b9111a565ae0be8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpiper_1_1Receiver.html">Receiver</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Receiver.html#a71e8ce1b34f1c5b3b9111a565ae0be8a">operator&gt;&gt;</a> (<a class="el" href="classpiper_1_1Sender.html">Sender</a>&lt; T &gt; &amp;tx)</td></tr>
+<tr class="memdesc:a71e8ce1b34f1c5b3b9111a565ae0be8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves received item into <a class="el" href="classpiper_1_1Sender.html" title="The interface for channel senders.">Sender</a>.  <a href="classpiper_1_1Receiver.html#a71e8ce1b34f1c5b3b9111a565ae0be8a">More...</a><br /></td></tr>
+<tr class="separator:a71e8ce1b34f1c5b3b9111a565ae0be8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -105,6 +118,67 @@ interface piper::Receiver&lt; T &gt;</div><p >The interface for channel receiver
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a71e8ce1b34f1c5b3b9111a565ae0be8a" name="a71e8ce1b34f1c5b3b9111a565ae0be8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71e8ce1b34f1c5b3b9111a565ae0be8a">&#9670;&nbsp;</a></span>operator&gt;&gt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpiper_1_1Receiver.html">Receiver</a>&lt; T &gt; &amp; <a class="el" href="classpiper_1_1Receiver.html">piper::Receiver</a>&lt; T &gt;::operator&gt;&gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classpiper_1_1Sender.html">Sender</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>tx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Moves received item into <a class="el" href="classpiper_1_1Sender.html" title="The interface for channel senders.">Sender</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tx</td><td>The sender into which the item is moved </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The receiver, for chained extractions </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This method forwards the return of <a class="el" href="classpiper_1_1Receiver.html#adb0704cbf1d6200d6f1e0d280fcc0248" title="Receives an item from the channel.">recv()</a> to <a class="el" href="classpiper_1_1Sender.html#aa32fd4423301b9ab40887099a73c988a" title="Copies and sends an item over the channel.">Sender::send()</a> </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Passing the connected sender to this method with a rendezvous channel will cause deadlock. </dd></dl>
+
+</div>
+</div>
+<a id="a8cc8fc51133ce8422dd7575e7861d01f" name="a8cc8fc51133ce8422dd7575e7861d01f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cc8fc51133ce8422dd7575e7861d01f">&#9670;&nbsp;</a></span>operator&gt;&gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpiper_1_1Receiver.html">Receiver</a>&lt; T &gt; &amp; <a class="el" href="classpiper_1_1Receiver.html">piper::Receiver</a>&lt; T &gt;::operator&gt;&gt; </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>item</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copies item from channel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">item</td><td>The output of the <a class="el" href="classpiper_1_1Receiver.html" title="The interface for channel receivers.">Receiver</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The receiver, for chained extractions </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This method assigns item to the return of <a class="el" href="classpiper_1_1Receiver.html#adb0704cbf1d6200d6f1e0d280fcc0248" title="Receives an item from the channel.">recv()</a> </dd></dl>
+
+</div>
+</div>
 <a id="adb0704cbf1d6200d6f1e0d280fcc0248" name="adb0704cbf1d6200d6f1e0d280fcc0248"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adb0704cbf1d6200d6f1e0d280fcc0248">&#9670;&nbsp;</a></span>recv()</h2>
 
@@ -134,12 +208,12 @@ template&lt;typename T &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>The item received over the channel </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Implementors of this interface may block on this method, and may also throw exceptions. </dd></dl>
 
-<p>Implemented in <a class="el" href="classpiper_1_1spmc_1_1Receiver.html#ac6976b4d277d9581a9120a11cb7cc3af">piper::spmc::Receiver&lt; T &gt;</a>, and <a class="el" href="classpiper_1_1mpsc_1_1Receiver.html#a3ec54b2f7a25d4f5c1ff1c89c7efcb83">piper::mpsc::Receiver&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classpiper_1_1spmc_1_1Receiver.html#ac6976b4d277d9581a9120a11cb7cc3af">piper::spmc::Receiver&lt; T &gt;</a>, <a class="el" href="classpiper_1_1mpsc_1_1Receiver.html#a3ec54b2f7a25d4f5c1ff1c89c7efcb83">piper::mpsc::Receiver&lt; T &gt;</a>, <a class="el" href="classpiper_1_1mpsc_1_1Channel.html#a9aa20c17f79603c8a9a925a3da0e4f95">piper::mpsc::Channel&lt; T &gt;</a>, and <a class="el" href="classpiper_1_1spmc_1_1Channel.html#a41ae9ca332e0aac94abfd7637d542f1d">piper::spmc::Channel&lt; T &gt;</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this interface was generated from the following file:<ul>
-<li>inc/piper/<a class="el" href="channel_8hpp_source.html">channel.hpp</a></li>
+<li>inc/piper/<a class="el" href="piper_8hpp_source.html">piper.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

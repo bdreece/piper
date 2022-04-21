@@ -1,0 +1,7 @@
+<map id="inc/piper/piper.hpp" name="inc/piper/piper.hpp">
+<area shape="rect" id="node1" title="Abstract channel interfaces." alt="" coords="85,5,211,32"/>
+<area shape="rect" id="node2" href="$mpsc_8hpp.html" title="Multiple producer, single consumer channel." alt="" coords="5,80,136,107"/>
+<area shape="rect" id="node4" href="$spmc_8hpp.html" title="Single producer, multiple consumer channel implementation." alt="" coords="160,80,291,107"/>
+<area shape="rect" id="node3" href="$mpsc_8cpp.html" title="MPSC testing suite." alt="" coords="15,155,126,181"/>
+<area shape="rect" id="node5" href="$spmc_8cpp.html" title="SPMC testing suite." alt="" coords="170,155,281,181"/>
+</map>

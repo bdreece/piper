@@ -1,0 +1,7 @@
+<map id="inc/piper/internal/buffer.hpp" name="inc/piper/internal/buffer.hpp">
+<area shape="rect" id="node1" title="Shared channel buffer base class and derivations." alt="" coords="89,5,207,47"/>
+<area shape="rect" id="node2" href="$mpsc_8hpp.html" title="Multiple producer, single consumer channel." alt="" coords="5,95,136,121"/>
+<area shape="rect" id="node4" href="$spmc_8hpp.html" title="Single producer, multiple consumer channel implementation." alt="" coords="160,95,291,121"/>
+<area shape="rect" id="node3" href="$mpsc_8cpp.html" title="MPSC testing suite." alt="" coords="15,169,126,196"/>
+<area shape="rect" id="node5" href="$spmc_8cpp.html" title="SPMC testing suite." alt="" coords="170,169,281,196"/>
+</map>

@@ -69,42 +69,55 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">spmc.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Single producer, multiple consumer channel.  
+<p>Single producer, multiple consumer channel implementation.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;stdexcept&gt;</code><br />
-<code>#include &quot;<a class="el" href="channel_8hpp_source.html">piper/channel.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="buffer_8hpp_source.html">piper/internal/buffer.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="piper_8hpp_source.html">piper/piper.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for spmc.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="spmc_8hpp__incl.png" border="0" usemap="#ainc_2piper_2spmc_8hpp" alt=""/></div>
+<!-- MAP 0 -->
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="spmc_8hpp__dep__incl.png" border="0" usemap="#ainc_2piper_2spmc_8hppdep" alt=""/></div>
+<map name="ainc_2piper_2spmc_8hppdep" id="ainc_2piper_2spmc_8hppdep">
+<area shape="rect" title="Single producer, multiple consumer channel implementation." alt="" coords="5,5,136,32"/>
+<area shape="rect" href="spmc_8cpp.html" title="SPMC testing suite." alt="" coords="15,80,126,107"/>
+</map>
+</div>
 </div>
 <p><a href="spmc_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPMC receiver.  <a href="classpiper_1_1spmc_1_1Receiver.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPMC channel receiver.  <a href="classpiper_1_1spmc_1_1Receiver.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1spmc_1_1Sender.html">piper::spmc::Sender&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPMC sender.  <a href="classpiper_1_1spmc_1_1Sender.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPMC channel sender.  <a href="classpiper_1_1spmc_1_1Sender.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1spmc_1_1Channel.html">piper::spmc::Channel&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A single producer, multiple consumer channel.  <a href="classpiper_1_1spmc_1_1Channel.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ae83d26621726af6a9ff9c7c8e0dd621d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ae83d26621726af6a9ff9c7c8e0dd621d"><td class="memTemplItemLeft" align="right" valign="top">std::tuple&lt; Sender&lt; T &gt;, Receiver&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="spmc_8hpp.html#ae83d26621726af6a9ff9c7c8e0dd621d">piper::spmc::channel</a> ()</td></tr>
-<tr class="memdesc:ae83d26621726af6a9ff9c7c8e0dd621d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an asynchronous channel.  <a href="spmc_8hpp.html#ae83d26621726af6a9ff9c7c8e0dd621d">More...</a><br /></td></tr>
-<tr class="separator:ae83d26621726af6a9ff9c7c8e0dd621d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a794ab6b74c50d177919d965aac048896"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a794ab6b74c50d177919d965aac048896"><td class="memTemplItemLeft" align="right" valign="top">std::tuple&lt; Sender&lt; T &gt;, Receiver&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="spmc_8hpp.html#a794ab6b74c50d177919d965aac048896">piper::spmc::channel</a> (std::size_t n)</td></tr>
-<tr class="memdesc:a794ab6b74c50d177919d965aac048896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a synchronous channel.  <a href="spmc_8hpp.html#a794ab6b74c50d177919d965aac048896">More...</a><br /></td></tr>
-<tr class="separator:a794ab6b74c50d177919d965aac048896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacepiper_1_1spmc"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepiper_1_1spmc.html">piper::spmc</a></td></tr>
+<tr class="memdesc:namespacepiper_1_1spmc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concrete <a class="el" href="classpiper_1_1spmc_1_1Channel.html" title="A single producer, multiple consumer channel.">Channel</a>, <a class="el" href="classpiper_1_1spmc_1_1Sender.html" title="SPMC channel sender.">Sender</a>, and <a class="el" href="classpiper_1_1spmc_1_1Receiver.html" title="SPMC channel receiver.">Receiver</a> implementations for single producer, multiple consumer channels. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Single producer, multiple consumer channel. </p>
+<div class="textblock"><p >Single producer, multiple consumer channel implementation. </p>
 <p >MIT License</p>
 <p >Copyright (c) 2022 Brian Reece</p>
 <p >Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
@@ -114,60 +127,7 @@ Functions</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>MIT License </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2022-04-19 </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="ae83d26621726af6a9ff9c7c8e0dd621d" name="ae83d26621726af6a9ff9c7c8e0dd621d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae83d26621726af6a9ff9c7c8e0dd621d">&#9670;&nbsp;</a></span>channel() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">std::tuple&lt; Sender&lt; T &gt;, Receiver&lt; T &gt; &gt; piper::spmc::channel </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates an asynchronous channel. </p>
-<dl class="section return"><dt>Returns</dt><dd>A sender and a receiver </dd></dl>
-
-</div>
-</div>
-<a id="a794ab6b74c50d177919d965aac048896" name="a794ab6b74c50d177919d965aac048896"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a794ab6b74c50d177919d965aac048896">&#9670;&nbsp;</a></span>channel() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">std::tuple&lt; Sender&lt; T &gt;, Receiver&lt; T &gt; &gt; piper::spmc::channel </td>
-          <td>(</td>
-          <td class="paramtype">std::size_t&#160;</td>
-          <td class="paramname"><em>n</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates a synchronous channel. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n</td><td>The size of the buffer </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A sender and a receiver </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>A size of zero represents a rendezvous channel </dd></dl>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3

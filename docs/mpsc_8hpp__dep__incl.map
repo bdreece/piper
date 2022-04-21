@@ -1,0 +1,4 @@
+<map id="inc/piper/mpsc.hpp" name="inc/piper/mpsc.hpp">
+<area shape="rect" id="node1" title="Multiple producer, single consumer channel." alt="" coords="5,5,136,32"/>
+<area shape="rect" id="node2" href="$mpsc_8cpp.html" title="MPSC testing suite." alt="" coords="15,80,126,107"/>
+</map>

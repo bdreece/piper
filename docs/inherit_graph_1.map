@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classpiper_1_1internal_1_1Buffer.html" title="Shared channel buffer base class." alt="" coords="5,64,173,91"/>
+<area shape="rect" id="node2" href="$classpiper_1_1internal_1_1AsyncBuffer.html" title="An asynchronous, unbounded buffer." alt="" coords="221,5,425,32"/>
+<area shape="rect" id="node3" href="$classpiper_1_1internal_1_1RendezvousBuffer.html" title="A synchronous, rendezvous buffer." alt="" coords="236,57,411,98"/>
+<area shape="rect" id="node4" href="$classpiper_1_1internal_1_1SyncBuffer.html" title="A synchronous, bounded buffer." alt="" coords="225,123,422,149"/>
+</map>
