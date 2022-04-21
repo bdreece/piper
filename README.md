@@ -1,8 +1,8 @@
 # piper
 
-![GitHub](https://img.shields.io/github/license/bdreece/piper)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bdreece/piper/CMake)
-![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/bdreece/piper?include_prereleases)
+[![GitHub](https://img.shields.io/github/license/bdreece/piper)](https://github.com/bdreece/piper/blob/main/LICENSE.md)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bdreece/piper/CMake)](https://github.com/bdreece/piper/actions/workflows/cmake.yml)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/bdreece/piper?include_prereleases)](https://github.com/bdreece/piper/releases)
 
 A template library for concurrent channels in C++
 
