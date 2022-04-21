@@ -32,7 +32,6 @@
  * @date 		2022-04-19
  */
 
-#include <memory>
 #include <stdexcept>
 
 #include "piper/internal/buffer.hpp"
