@@ -25,7 +25,7 @@
 /**
  * @file 		spmc.hpp
  * @brief 		Single producer, multiple consumer channel
- * implementation
+ * 				implementation
  * @author 		Brian Reece
  * @version 	0.1
  * @copyright 	MIT License
@@ -54,6 +54,10 @@ namespace piper::spmc {
      * @implements	piper::Receiver
      */
     template <typename T> class Receiver : public piper::Receiver<T> {
+            /**
+             * @brief 	The shared channel buffer
+             * @note	The buffer is not destructed with the Receiver
+             */
             std::weak_ptr<piper::internal::Buffer<T>> buffer;
 
         public:
@@ -102,12 +106,14 @@ namespace piper::spmc {
     template <typename T> class Sender : public piper::Sender<T> {
             friend class Receiver<T>;
 
+            /**
+             * @brief 	The shared channel buffer
+             * @note	The buffer is destructed with the sender
+             */
             std::shared_ptr<piper::internal::Buffer<T>> buffer;
 
         public:
-            /**
-             * @brief Constructs an asynchronous Sender
-             */
+            /// Constructs an asynchronous Sender
             Sender();
 
             /**
@@ -155,20 +161,24 @@ namespace piper::spmc {
     template <typename T> class Channel final : public piper::Channel<T> {
             friend class Sender<T>;
             friend class Receiver<T>;
+
+            /// The Sender component
             std::unique_ptr<Sender<T>> tx;
+
+            /// The Receiver component
             std::unique_ptr<Receiver<T>> rx;
 
         public:
-            /**
-             * @brief	Constructs an asynchronous Channel
-             */
+            /// Constructs an asynchronous Channel
             Channel() : tx(), rx(this->tx) {}
+
             /**
              * @brief 	Constructs a synchronous Channel
              * @param 	n The size of the buffer
              * @note	A size of 0 represents a rendezvous channel
              */
             Channel(std::size_t n) : tx(n), rx(this->tx) {}
+
             /**
              * @brief	Moves a Channel
              * @param 	ch The Channel to move

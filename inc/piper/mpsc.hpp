@@ -57,12 +57,14 @@ namespace piper::mpsc {
     template <typename T> class Receiver : public piper::Receiver<T> {
             friend class Sender<T>;
 
+            /**
+             * @brief The shared channel buffer
+             * @note  The buffer will be destructed with the receiver
+             */
             std::shared_ptr<piper::internal::Buffer<T>> buffer;
 
         public:
-            /**
-             * @brief 	Constructs an asynchronous Receiver
-             */
+            ///	Constructs an asynchronous Receiver
             Receiver();
 
             /**
@@ -102,6 +104,12 @@ namespace piper::mpsc {
      * @implements 	piper::Sender
      */
     template <typename T> class Sender : public piper::Sender<T> {
+
+            /**
+             * @brief The shared channel buffer
+             * @note  The buffer will not be destructed with
+             * 		  the sender
+             */
             std::weak_ptr<piper::internal::Buffer<T>> buffer;
 
         public:
@@ -149,13 +157,15 @@ namespace piper::mpsc {
     template <typename T> class Channel : public piper::Channel<T> {
             friend class Sender<T>;
             friend class Receiver<T>;
+
+            /// The Sender component
             std::unique_ptr<Sender<T>> tx;
+
+            /// The Receiver component
             std::unique_ptr<Receiver<T>> rx;
 
         public:
-            /**
-             * @brief 	Constructs an asynchronous Channel
-             */
+            /// Constructs an asynchronous Channel
             Channel() : rx{new Receiver<T>()}, tx(*this->rx){};
 
             /**

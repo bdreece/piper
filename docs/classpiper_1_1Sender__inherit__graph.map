@@ -1,9 +1,9 @@
 <map id="piper::Sender&lt; T &gt;" name="piper::Sender&lt; T &gt;">
-<area shape="rect" id="node1" title="The interface for channel senders." alt="" coords="5,97,132,123"/>
-<area shape="rect" id="node2" href="$classpiper_1_1mpsc_1_1Sender.html" title=" " alt="" coords="195,5,330,47"/>
-<area shape="rect" id="node3" href="$classpiper_1_1Channel.html" title="A bidirectional channel interface." alt="" coords="196,71,329,98"/>
-<area shape="rect" id="node6" href="$classpiper_1_1mpsc_1_1Sender.html" title="MPSC channel sender." alt="" coords="180,122,345,149"/>
-<area shape="rect" id="node7" href="$classpiper_1_1spmc_1_1Sender.html" title="SPMC channel sender." alt="" coords="180,173,345,199"/>
-<area shape="rect" id="node4" href="$classpiper_1_1mpsc_1_1Channel.html" title="A multiple producer, single consumer channel." alt="" coords="393,46,564,73"/>
-<area shape="rect" id="node5" href="$classpiper_1_1spmc_1_1Channel.html" title="A single producer, multiple consumer channel." alt="" coords="393,97,564,123"/>
+<area shape="rect" id="node1" title="The interface for channel senders." alt="" coords="5,70,132,97"/>
+<area shape="rect" id="node2" href="$classpiper_1_1mpsc_1_1Sender.html" title=" " alt="" coords="453,5,587,47"/>
+<area shape="rect" id="node3" href="$classpiper_1_1Channel.html" title="A bidirectional channel interface." alt="" coords="197,99,331,126"/>
+<area shape="rect" id="node6" href="$classpiper_1_1mpsc_1_1Sender.html" title="MPSC channel sender." alt="" coords="181,49,347,75"/>
+<area shape="rect" id="node7" href="$classpiper_1_1spmc_1_1Sender.html" title="SPMC channel sender." alt="" coords="181,150,347,177"/>
+<area shape="rect" id="node4" href="$classpiper_1_1mpsc_1_1Channel.html" title="A multiple producer, single consumer channel." alt="" coords="435,93,605,119"/>
+<area shape="rect" id="node5" href="$classpiper_1_1spmc_1_1Channel.html" title="A single producer, multiple consumer channel." alt="" coords="435,143,605,170"/>
 </map>
