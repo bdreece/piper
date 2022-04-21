@@ -66,7 +66,55 @@ $(function() {
   <div class="headertitle"><div class="title">piper </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_README"></a> A template library for channels in C++ </p>
+<div class="textblock"><p ><a class="anchor" id="md_README"></a> A template library for concurrent channels in C++</p>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Table of Contents</h2>
+<ul>
+<li>Overview<ul>
+<li>Sender</li>
+<li>Receiver</li>
+<li>Channel</li>
+<li>Buffers<ul>
+<li>Asynchronous</li>
+<li>Synchronous</li>
+<li>Rendezvous</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://bdreece.github.io/piper/">API Reference</a></li>
+<li>Future Plans</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Overview</h2>
+<p >piper is a C++20 template library for concurrent channels, using STL concurrency primitives such as <code>std::mutex</code> and <code>std::condition_variable</code>.</p>
+<h3><a class="anchor" id="autotoc_md3"></a>
+Sender</h3>
+<p >A <code><a class="el" href="classpiper_1_1Sender.html" title="The interface for channel senders.">piper::Sender</a></code> is an abstract template class used to send data through a channel buffer. A <code><a class="el" href="classpiper_1_1mpsc_1_1Sender.html" title="MPSC channel sender.">piper::mpsc::Sender</a></code> can be copied, whereas a <code><a class="el" href="classpiper_1_1spmc_1_1Sender.html" title="SPMC channel sender.">piper::spmc::Sender</a></code> cannot. Note that a <code><a class="el" href="classpiper_1_1mpsc_1_1Sender.html" title="MPSC channel sender.">piper::mpsc::Sender</a></code> can only be constructed from a <code><a class="el" href="classpiper_1_1mpsc_1_1Receiver.html" title="MPSC channel receiver.">piper::mpsc::Receiver</a></code> or <code><a class="el" href="classpiper_1_1mpsc_1_1Channel.html" title="A multiple producer, single consumer channel.">piper::mpsc::Channel</a></code>, or copied from another <code><a class="el" href="classpiper_1_1mpsc_1_1Sender.html" title="MPSC channel sender.">piper::mpsc::Sender</a></code>. Check the API reference for details.</p>
+<h3><a class="anchor" id="autotoc_md4"></a>
+Receiver</h3>
+<p >A <code><a class="el" href="classpiper_1_1Receiver.html" title="The interface for channel receivers.">piper::Receiver</a></code> is an abstract template class used to receive data from a channel buffer. A <code><a class="el" href="classpiper_1_1spmc_1_1Receiver.html" title="SPMC channel receiver.">piper::spmc::Receiver</a></code> can be copied, whereas a <code><a class="el" href="classpiper_1_1mpsc_1_1Receiver.html" title="MPSC channel receiver.">piper::mpsc::Receiver</a></code> cannot. Note that a <code><a class="el" href="classpiper_1_1spmc_1_1Receiver.html" title="SPMC channel receiver.">piper::spmc::Receiver</a></code> can only be constructed from a <code><a class="el" href="classpiper_1_1spmc_1_1Sender.html" title="SPMC channel sender.">piper::spmc::Sender</a></code> or <code><a class="el" href="classpiper_1_1spmc_1_1Channel.html" title="A single producer, multiple consumer channel.">piper::spmc::Channel</a></code>, or copied from another <code><a class="el" href="classpiper_1_1spmc_1_1Receiver.html" title="SPMC channel receiver.">piper::spmc::Receiver</a></code>. Check the API reference for details.</p>
+<h3><a class="anchor" id="autotoc_md5"></a>
+Channel</h3>
+<p >A <code><a class="el" href="classpiper_1_1Channel.html" title="A bidirectional channel interface.">piper::Channel</a></code> is an abstract template class that composes <code><a class="el" href="classpiper_1_1Sender.html" title="The interface for channel senders.">piper::Sender</a></code> and <code><a class="el" href="classpiper_1_1Receiver.html" title="The interface for channel receivers.">piper::Receiver</a></code>. A channel cannot be copied, only moved. However, Senders or Receivers may be copied from a Channel, depending on the concrete implementation.</p>
+<h3><a class="anchor" id="autotoc_md6"></a>
+Flavors</h3>
+<p >Concurrent channels often come in different "flavors", which correspond to the type of underlying buffer used to transmit data from a Sender to a Receiver. Different flavors may be used to achieve different levels of synchronization between Senders and Receivers.</p>
+<h4><a class="anchor" id="autotoc_md7"></a>
+Asynchronous</h4>
+<p >An asynchronous channel is one whose buffer is unbounded. Aggressive senders may grow the buffer instead of blocking while waiting for a receiver.</p>
+<p >The default constructors for <code><a class="el" href="classpiper_1_1mpsc_1_1Receiver.html" title="MPSC channel receiver.">piper::mpsc::Receiver</a></code>, <code><a class="el" href="classpiper_1_1spmc_1_1Sender.html" title="SPMC channel sender.">piper::spmc::Sender</a></code>, and all concrete implementations of <code><a class="el" href="classpiper_1_1Channel.html" title="A bidirectional channel interface.">piper::Channel</a></code> utilize an asynchronous buffer.</p>
+<h4><a class="anchor" id="autotoc_md8"></a>
+Synchronous</h4>
+<p >A synchronous channel is one whose buffer is bounded. Aggressive senders may block while waiting for a receiver, should the buffer be full.</p>
+<p >Constructors for <code><a class="el" href="classpiper_1_1mpsc_1_1Receiver.html" title="MPSC channel receiver.">piper::mpsc::Receiver</a></code>, <code><a class="el" href="classpiper_1_1spmc_1_1Sender.html" title="SPMC channel sender.">piper::spmc::Sender</a></code>, and all concrete implementations of <code><a class="el" href="classpiper_1_1Channel.html" title="A bidirectional channel interface.">piper::Channel</a></code> that take a <code>std::size_t n</code> parameter will only utilize a synchronous buffer if <code>n &gt; 0</code>. See Rendezvous for more details.</p>
+<h4><a class="anchor" id="autotoc_md9"></a>
+Rendezvous</h4>
+<p >A rendezvous channel is one whose buffer has no capacity. In practice, this means that a Sender blocks until a Receiver has collected the transmitted data, allowing both threads to continue at a synchronized point.</p>
+<p >Constructors for <code><a class="el" href="classpiper_1_1mpsc_1_1Receiver.html" title="MPSC channel receiver.">piper::mpsc::Receiver</a></code>, <code><a class="el" href="classpiper_1_1spmc_1_1Sender.html" title="SPMC channel sender.">piper::spmc::Sender</a></code>, and all concrete implementations of <code><a class="el" href="classpiper_1_1Channel.html" title="A bidirectional channel interface.">piper::Channel</a></code> that take a <code>std::size_t n</code> parameter will only utilize a rendezvous buffer if <code>n == 0</code>. See Synchronous for more details.</p>
+<h2><a class="anchor" id="autotoc_md10"></a>
+Future Plans</h2>
+<p >I plan to implement more robust tests for the existing codebase, and add different ownership schemes in concrete implementations for <code><a class="el" href="classpiper_1_1Channel.html" title="A bidirectional channel interface.">piper::Channel</a></code> to help with flexibility. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

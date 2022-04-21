@@ -1,4 +1,0 @@
-<map id="piper::internal::SyncBuffer&lt; T &gt;" name="piper::internal::SyncBuffer&lt; T &gt;">
-<area shape="rect" id="node1" title="A synchronous, bounded buffer." alt="" coords="5,80,203,107"/>
-<area shape="rect" id="node2" href="$classpiper_1_1internal_1_1Buffer.html" title="Shared channel buffer base class." alt="" coords="20,5,188,32"/>
-</map>

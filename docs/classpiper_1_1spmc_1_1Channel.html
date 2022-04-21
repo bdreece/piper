@@ -63,12 +63,13 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>piper</b></li><li class="navelem"><a class="el" href="namespacepiper_1_1spmc.html">spmc</a></li><li class="navelem"><a class="el" href="classpiper_1_1spmc_1_1Channel.html">Channel</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespacepiper.html">piper</a></li><li class="navelem"><a class="el" href="namespacepiper_1_1spmc.html">spmc</a></li><li class="navelem"><a class="el" href="classpiper_1_1spmc_1_1Channel.html">Channel</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classpiper_1_1spmc_1_1Channel-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">piper::spmc::Channel&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -117,15 +118,26 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a960344ed2d174e5edcb51180f06d8dfa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpiper_1_1spmc_1_1Sender.html">Sender</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Sender.html#a960344ed2d174e5edcb51180f06d8dfa">operator&lt;&lt;</a> (T &amp;&amp;item)</td></tr>
 <tr class="memdesc:a960344ed2d174e5edcb51180f06d8dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves and sends an item over the channel.  <a href="classpiper_1_1Sender.html#a960344ed2d174e5edcb51180f06d8dfa">More...</a><br /></td></tr>
 <tr class="separator:a960344ed2d174e5edcb51180f06d8dfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ec89ca53892c566d1a5ca7e9f99fd32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpiper_1_1spmc_1_1Sender.html">Sender</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Sender.html#a1ec89ca53892c566d1a5ca7e9f99fd32">operator&lt;&lt;</a> (<a class="el" href="classpiper_1_1spmc_1_1Receiver.html">Receiver</a>&lt; T &gt; &amp;rx)</td></tr>
+<tr class="memitem:a1ec89ca53892c566d1a5ca7e9f99fd32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpiper_1_1spmc_1_1Sender.html">Sender</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Sender.html#a1ec89ca53892c566d1a5ca7e9f99fd32">operator&lt;&lt;</a> (<a class="el" href="classpiper_1_1spmc_1_1Receiver.html">Receiver</a>&lt; T &gt; &amp;<a class="el" href="classpiper_1_1spmc_1_1Channel.html#abb17921e6f26a51c34d0b97fac2fe221">rx</a>)</td></tr>
 <tr class="memdesc:a1ec89ca53892c566d1a5ca7e9f99fd32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves received item into <a class="el" href="classpiper_1_1Sender.html" title="The interface for channel senders.">Sender</a>.  <a href="classpiper_1_1Sender.html#a1ec89ca53892c566d1a5ca7e9f99fd32">More...</a><br /></td></tr>
 <tr class="separator:a1ec89ca53892c566d1a5ca7e9f99fd32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cc8fc51133ce8422dd7575e7861d01f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">Receiver</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Receiver.html#a8cc8fc51133ce8422dd7575e7861d01f">operator&gt;&gt;</a> (T &amp;item)</td></tr>
 <tr class="memdesc:a8cc8fc51133ce8422dd7575e7861d01f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies item from channel.  <a href="classpiper_1_1Receiver.html#a8cc8fc51133ce8422dd7575e7861d01f">More...</a><br /></td></tr>
 <tr class="separator:a8cc8fc51133ce8422dd7575e7861d01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71e8ce1b34f1c5b3b9111a565ae0be8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">Receiver</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Receiver.html#a71e8ce1b34f1c5b3b9111a565ae0be8a">operator&gt;&gt;</a> (<a class="el" href="classpiper_1_1spmc_1_1Sender.html">Sender</a>&lt; T &gt; &amp;tx)</td></tr>
+<tr class="memitem:a71e8ce1b34f1c5b3b9111a565ae0be8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">Receiver</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Receiver.html#a71e8ce1b34f1c5b3b9111a565ae0be8a">operator&gt;&gt;</a> (<a class="el" href="classpiper_1_1spmc_1_1Sender.html">Sender</a>&lt; T &gt; &amp;<a class="el" href="classpiper_1_1spmc_1_1Channel.html#afb95b779908fc575a82978f8f27c672d">tx</a>)</td></tr>
 <tr class="memdesc:a71e8ce1b34f1c5b3b9111a565ae0be8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves received item into <a class="el" href="classpiper_1_1Sender.html" title="The interface for channel senders.">Sender</a>.  <a href="classpiper_1_1Receiver.html#a71e8ce1b34f1c5b3b9111a565ae0be8a">More...</a><br /></td></tr>
 <tr class="separator:a71e8ce1b34f1c5b3b9111a565ae0be8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:afb95b779908fc575a82978f8f27c672d"><td class="memItemLeft" align="right" valign="top"><a id="afb95b779908fc575a82978f8f27c672d" name="afb95b779908fc575a82978f8f27c672d"></a>
+std::unique_ptr&lt; <a class="el" href="classpiper_1_1spmc_1_1Sender.html">Sender</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>tx</b></td></tr>
+<tr class="memdesc:afb95b779908fc575a82978f8f27c672d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classpiper_1_1spmc_1_1Sender.html" title="SPMC channel sender.">Sender</a> component. <br /></td></tr>
+<tr class="separator:afb95b779908fc575a82978f8f27c672d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb17921e6f26a51c34d0b97fac2fe221"><td class="memItemLeft" align="right" valign="top"><a id="abb17921e6f26a51c34d0b97fac2fe221" name="abb17921e6f26a51c34d0b97fac2fe221"></a>
+std::unique_ptr&lt; <a class="el" href="classpiper_1_1spmc_1_1Receiver.html">Receiver</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rx</b></td></tr>
+<tr class="memdesc:abb17921e6f26a51c34d0b97fac2fe221"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classpiper_1_1spmc_1_1Receiver.html" title="SPMC channel receiver.">Receiver</a> component. <br /></td></tr>
+<tr class="separator:abb17921e6f26a51c34d0b97fac2fe221"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />

@@ -1,7 +1,6 @@
 <map id="piper::internal::Buffer&lt; T &gt;" name="piper::internal::Buffer&lt; T &gt;">
-<area shape="rect" id="node1" title="Shared channel buffer base class." alt="" coords="5,93,173,120"/>
-<area shape="rect" id="node2" href="$classpiper_1_1internal_1_1AsyncBuffer.html" title="An asynchronous, unbounded buffer." alt="" coords="261,5,465,32"/>
-<area shape="rect" id="node3" href="$classpiper_1_1internal_1_1RendezvousBuffer.html" title="A synchronous, rendezvous buffer." alt="" coords="276,57,451,98"/>
-<area shape="rect" id="node4" href="$classpiper_1_1internal_1_1SyncBuffer.html" title="A synchronous, bounded buffer." alt="" coords="265,123,462,149"/>
-<area shape="rect" id="node5" href="$classpiper_1_1internal_1_1Buffer.html" title=" " alt="" coords="294,174,433,215"/>
+<area shape="rect" id="node1" title="Shared channel buffer base class." alt="" coords="5,64,173,91"/>
+<area shape="rect" id="node2" href="$classpiper_1_1internal_1_1AsyncBuffer.html" title="An asynchronous, unbounded buffer." alt="" coords="221,5,425,32"/>
+<area shape="rect" id="node3" href="$classpiper_1_1internal_1_1RendezvousBuffer.html" title="A synchronous, rendezvous buffer." alt="" coords="236,57,411,98"/>
+<area shape="rect" id="node4" href="$classpiper_1_1internal_1_1SyncBuffer.html" title="A synchronous, bounded buffer." alt="" coords="225,123,422,149"/>
 </map>

@@ -63,12 +63,13 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>piper</b></li><li class="navelem"><a class="el" href="namespacepiper_1_1spmc.html">spmc</a></li><li class="navelem"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">Receiver</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespacepiper.html">piper</a></li><li class="navelem"><a class="el" href="namespacepiper_1_1spmc.html">spmc</a></li><li class="navelem"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">Receiver</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classpiper_1_1spmc_1_1Receiver-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">piper::spmc::Receiver&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -111,6 +112,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a71e8ce1b34f1c5b3b9111a565ae0be8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">Receiver</a>&lt; T &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1Receiver.html#a71e8ce1b34f1c5b3b9111a565ae0be8a">operator&gt;&gt;</a> (<a class="el" href="classpiper_1_1spmc_1_1Sender.html">Sender</a>&lt; T &gt; &amp;tx)</td></tr>
 <tr class="memdesc:a71e8ce1b34f1c5b3b9111a565ae0be8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves received item into <a class="el" href="classpiper_1_1Sender.html" title="The interface for channel senders.">Sender</a>.  <a href="classpiper_1_1Receiver.html#a71e8ce1b34f1c5b3b9111a565ae0be8a">More...</a><br /></td></tr>
 <tr class="separator:a71e8ce1b34f1c5b3b9111a565ae0be8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ae1ee8827be7775375d69efea5671935e"><td class="memItemLeft" align="right" valign="top">std::weak_ptr&lt; <a class="el" href="classpiper_1_1internal_1_1Buffer.html">piper::internal::Buffer</a>&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html#ae1ee8827be7775375d69efea5671935e">buffer</a></td></tr>
+<tr class="memdesc:ae1ee8827be7775375d69efea5671935e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The shared channel buffer.  <a href="classpiper_1_1spmc_1_1Receiver.html#ae1ee8827be7775375d69efea5671935e">More...</a><br /></td></tr>
+<tr class="separator:ae1ee8827be7775375d69efea5671935e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -134,7 +141,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver</a>&lt; T &gt;<a class="el" href="classpiper_1_1mpsc_1_1Receiver.html">::Receiver</a> </td>
+          <td class="memname"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver</a>&lt; T &gt;::Receiver </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classpiper_1_1spmc_1_1Sender.html">Sender</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>tx</em></td><td>)</td>
@@ -170,7 +177,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver</a>&lt; T &gt;<a class="el" href="classpiper_1_1mpsc_1_1Receiver.html">::Receiver</a> </td>
+          <td class="memname"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver</a>&lt; T &gt;::Receiver </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classpiper_1_1spmc_1_1Channel.html">Channel</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>ch</em></td><td>)</td>
@@ -206,7 +213,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver</a>&lt; T &gt;<a class="el" href="classpiper_1_1mpsc_1_1Receiver.html">::Receiver</a> </td>
+          <td class="memname"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver</a>&lt; T &gt;::Receiver </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classpiper_1_1spmc_1_1Receiver.html">Receiver</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>rx</em></td><td>)</td>
@@ -242,7 +249,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver</a>&lt; T &gt;<a class="el" href="classpiper_1_1mpsc_1_1Receiver.html">::Receiver</a> </td>
+          <td class="memname"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver</a>&lt; T &gt;::Receiver </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classpiper_1_1spmc_1_1Receiver.html">Receiver</a>&lt; T &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>rx</em></td><td>)</td>
@@ -377,6 +384,34 @@ template&lt;typename T &gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Blocks on empty buffer </dd></dl>
 
 <p>Implements <a class="el" href="classpiper_1_1Receiver.html#adb0704cbf1d6200d6f1e0d280fcc0248">piper::Receiver&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae1ee8827be7775375d69efea5671935e" name="ae1ee8827be7775375d69efea5671935e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1ee8827be7775375d69efea5671935e">&#9670;&nbsp;</a></span>buffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::weak_ptr&lt;<a class="el" href="classpiper_1_1internal_1_1Buffer.html">piper::internal::Buffer</a>&lt;T&gt; &gt; <a class="el" href="classpiper_1_1spmc_1_1Receiver.html">piper::spmc::Receiver</a>&lt; T &gt;::buffer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The shared channel buffer. </p>
+<dl class="section note"><dt>Note</dt><dd>The buffer is not destructed with the <a class="el" href="classpiper_1_1spmc_1_1Receiver.html" title="SPMC channel receiver.">Receiver</a> </dd></dl>
 
 </div>
 </div>

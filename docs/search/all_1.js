@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['boost_5fauto_5ftest_5fcase_0',['BOOST_AUTO_TEST_CASE',['../mpsc_8cpp.html#ada1172da6974818fd353713e4a6dc6d4',1,'BOOST_AUTO_TEST_CASE(expired):&#160;mpsc.cpp'],['../spmc_8cpp.html#ada1172da6974818fd353713e4a6dc6d4',1,'BOOST_AUTO_TEST_CASE(expired):&#160;spmc.cpp']]],
-  ['boost_5ffixture_5ftest_5fcase_1',['BOOST_FIXTURE_TEST_CASE',['../mpsc_8cpp.html#a4a5501a00e5fb91faabeff3e18959480',1,'BOOST_FIXTURE_TEST_CASE(one_sender, fixture):&#160;mpsc.cpp'],['../mpsc_8cpp.html#adfb68bc734f662a3cf58addaa3ed9c37',1,'BOOST_FIXTURE_TEST_CASE(five_senders, fixture):&#160;mpsc.cpp'],['../spmc_8cpp.html#ac69141f868ef914145493864777e813b',1,'BOOST_FIXTURE_TEST_CASE(one_receiver, fixture):&#160;spmc.cpp'],['../spmc_8cpp.html#a7a65b20f4ce3c55f0e8a01eaadcf8014',1,'BOOST_FIXTURE_TEST_CASE(five_receivers, fixture):&#160;spmc.cpp']]],
-  ['buffer_2',['Buffer',['../classpiper_1_1internal_1_1Buffer.html',1,'piper::internal']]],
-  ['buffer_2ehpp_3',['buffer.hpp',['../buffer_8hpp.html',1,'']]],
-  ['buffer_3c_20int_20_3e_4',['Buffer&lt; int &gt;',['../classpiper_1_1internal_1_1Buffer.html',1,'piper::internal']]]
+  ['boost_5fauto_5ftest_5fcase_0',['BOOST_AUTO_TEST_CASE',['../namespacepiper_1_1tests_1_1mpsc.html#aa3292ba3b8d4476cd980d17272213002',1,'piper::tests::mpsc::BOOST_AUTO_TEST_CASE()'],['../namespacepiper_1_1tests_1_1spmc.html#a2e37b3eef5a9055c6a3bc74fac84c2ce',1,'piper::tests::spmc::BOOST_AUTO_TEST_CASE()']]],
+  ['boost_5ffixture_5ftest_5fcase_1',['BOOST_FIXTURE_TEST_CASE',['../namespacepiper_1_1tests_1_1mpsc.html#a64270f408926a4e9bc1dcc644f343938',1,'piper::tests::mpsc::BOOST_FIXTURE_TEST_CASE(one_sender, fixture)'],['../namespacepiper_1_1tests_1_1mpsc.html#a76a00b6d2ac1e018a477306b67b65921',1,'piper::tests::mpsc::BOOST_FIXTURE_TEST_CASE(five_senders, fixture)'],['../namespacepiper_1_1tests_1_1spmc.html#ab99d3c814ed7975fef911a97f6b8814d',1,'piper::tests::spmc::BOOST_FIXTURE_TEST_CASE(one_receiver, fixture)'],['../namespacepiper_1_1tests_1_1spmc.html#aa9e180f5e361c89a2ec613b0efb6a57c',1,'piper::tests::spmc::BOOST_FIXTURE_TEST_CASE(five_receivers, fixture)']]],
+  ['buffer_2',['buffer',['../classpiper_1_1mpsc_1_1Receiver.html#af0307d39249f67f9a3af98101c91d893',1,'piper::mpsc::Receiver::buffer()'],['../classpiper_1_1mpsc_1_1Sender.html#a7348c41cf246c1be15ec17bc1745f043',1,'piper::mpsc::Sender::buffer()'],['../classpiper_1_1spmc_1_1Receiver.html#ae1ee8827be7775375d69efea5671935e',1,'piper::spmc::Receiver::buffer()'],['../classpiper_1_1spmc_1_1Sender.html#a837c4644194c710d35c7665d5b3261f5',1,'piper::spmc::Sender::buffer()']]],
+  ['buffer_3',['Buffer',['../classpiper_1_1internal_1_1Buffer.html',1,'piper::internal']]],
+  ['buffer_2ehpp_4',['buffer.hpp',['../buffer_8hpp.html',1,'']]]
 ];
