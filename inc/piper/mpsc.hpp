@@ -36,8 +36,8 @@
 #include <tuple>
 #include <utility>
 
-#include "piper/channel.hpp"
 #include "piper/internal/buffer.hpp"
+#include "piper/piper.hpp"
 
 namespace piper::mpsc {
     template <typename T> class Sender;
@@ -115,7 +115,7 @@ namespace piper::mpsc {
             void send(T&& item) noexcept(false) override;
     };
 
-    template <typename T> class Channel final : public piper::Channel<T> {
+    template <typename T> class Channel : public piper::Channel<T> {
             friend class Sender<T>;
             friend class Receiver<T>;
             std::unique_ptr<Sender<T>> tx;

@@ -35,6 +35,7 @@
 #include <condition_variable>
 #include <deque>
 #include <mutex>
+#include <optional>
 #include <utility>
 
 namespace piper::internal {
@@ -46,7 +47,6 @@ namespace piper::internal {
     template <typename T> class Buffer {
         protected:
             std::mutex mutex;
-            std::deque<T> queue;
 
         public:
             /**
@@ -74,6 +74,7 @@ namespace piper::internal {
      */
     template <typename T> class AsyncBuffer final : public Buffer<T> {
             std::condition_variable available;
+            std::deque<T> queue;
 
         public:
             /**
@@ -108,6 +109,7 @@ namespace piper::internal {
     template <typename T> class SyncBuffer : public Buffer<T> {
         protected:
             std::size_t n;
+            std::deque<T> queue;
             std::condition_variable available[2];
 
         public:
@@ -148,14 +150,16 @@ namespace piper::internal {
      * @tparam T The type of item transferred over the buffer
      * @extends SyncBuffer<T>
      */
-    template <typename T> class RendezvousBuffer final : public SyncBuffer<T> {
-            bool ready;
+    template <typename T> class RendezvousBuffer final : public Buffer<T> {
+            std::optional<T> item;
+            std::condition_variable available[3];
 
         public:
             /**
              * @brief Creates a rendezvous buffer
              */
-            RendezvousBuffer() : SyncBuffer<T>(0), ready(true){};
+            RendezvousBuffer() : Buffer<T>(){};
+
             RendezvousBuffer(const RendezvousBuffer<T>&) = delete;
             RendezvousBuffer(RendezvousBuffer<T>&&) = delete;
 
@@ -178,7 +182,7 @@ namespace piper::internal {
     template <typename T> void AsyncBuffer<T>::push(const T& item) {
         {
             // Acquire lock
-            std::unique_lock<std::mutex> lock(this->mutex);
+            auto lock = std::unique_lock(this->mutex);
 
             // Push item to queue
             this->queue.push_back(item);
@@ -190,7 +194,7 @@ namespace piper::internal {
     template <typename T> void AsyncBuffer<T>::push(T&& item) {
         {
             // Acquire lock
-            std::unique_lock<std::mutex> lock(this->mutex);
+            auto lock = std::unique_lock(this->mutex);
 
             // Push item to queue
             this->queue.push_back(std::forward<T>(item));
@@ -203,7 +207,7 @@ namespace piper::internal {
         T item;
         {
             // Acquire lock
-            std::unique_lock<std::mutex> lock(this->mutex);
+            auto lock = std::unique_lock(this->mutex);
 
             // Block receiver if queue is empty
             this->available.wait(lock, [this] { return !this->queue.empty(); });
@@ -218,7 +222,7 @@ namespace piper::internal {
     template <typename T> void SyncBuffer<T>::push(const T& item) {
         {
             // Acquire lock
-            std::unique_lock<std::mutex> lock(this->mutex);
+            auto lock = std::unique_lock(this->mutex);
 
             // Block sender if queue is full
             this->available[1].wait(lock,
@@ -234,7 +238,7 @@ namespace piper::internal {
     template <typename T> void SyncBuffer<T>::push(T&& item) {
         {
             // Acquire lock
-            std::unique_lock<std::mutex> lock(this->mutex);
+            auto lock = std::unique_lock(this->mutex);
 
             // Block sender if queue is full
             this->available[1].wait(lock,
@@ -251,7 +255,7 @@ namespace piper::internal {
         T item;
         {
             // Acquire lock
-            std::unique_lock<std::mutex> lock(this->mutex);
+            auto lock = std::unique_lock(this->mutex);
 
             // Block receiver if queue is empty
             this->available[0].wait(lock,
@@ -270,59 +274,67 @@ namespace piper::internal {
     template <typename T> void RendezvousBuffer<T>::push(const T& item) {
         {
             // Acquire lock
-            std::unique_lock<std::mutex> lock(this->mutex);
+            auto lock = std::unique_lock(this->mutex);
 
-            // Block sender until ready with receivers
-            this->available[1].wait(lock,
-                                    [this] { return ready && this->n > 0; });
-
-            // No longer ready for input
-            ready = false;
+            // Block sender until buffer is ready
+            this->available[1].wait(lock, [this] { return !this->item; });
 
             // Push item to queue
-            this->queue.push_back(item);
+            this->item = item;
         }
-        // Notify a waiting receiver
+
+        // Notify a waiting receiver that buffer is filled
         this->available[0].notify_one();
+
+        {
+            // Reacquire lock
+            auto lock = std::unique_lock(this->mutex);
+
+            // Block sender until item has been received
+            this->available[2].wait(lock, [this] { return !this->item; });
+        }
     }
 
     template <typename T> void RendezvousBuffer<T>::push(T&& item) {
         {
             // Acquire lock
-            std::unique_lock<std::mutex> lock(this->mutex);
+            auto lock = std::unique_lock(this->mutex);
 
-            // Block sender until ready with receivers
-            this->available[1].wait(lock,
-                                    [this] { return ready && this->n > 0; });
-
-            // No longer ready for input
-            ready = false;
+            // Block sender until buffer is ready
+            this->available[1].wait(lock, [this] { return !this->item; });
 
             // Push item to queue
-            this->queue.push_back(std::forward<T>(item));
+            this->item = std::forward<T>(item);
         }
-        // Notify a waiting receiver
+
+        // Notify a waiting receiver that buffer is filled
         this->available[0].notify_one();
+
+        {
+            // Reacquire lock
+            auto lock = std::unique_lock(this->mutex);
+
+            // Block sender until item has been received
+            this->available[2].wait(lock, [this] { return !this->item; });
+        }
     }
 
     template <typename T> T RendezvousBuffer<T>::pop() {
         T item;
         {
             // Acquire lock
-            std::unique_lock<std::mutex> lock(this->mutex);
+            auto lock = std::unique_lock(this->mutex);
 
-            this->n++;
-            // Block until sender ready
-            this->available[0].wait(lock, [this] { return !ready; });
+            // Block receiver until buffer is filled
+            this->available[0].wait(lock, [this] { return this->item; });
 
             // Pop item from queue
-            item = this->queue.front();
-            this->queue.pop_front();
-
-            // Signal to sender that queue is empty
-            this->n--;
-            ready = true;
+            item = *this->item;
+            this->item.reset();
         }
+
+        // Notify sender that item is received
+        this->available[2].notify_one();
 
         // Notify a waiting sender
         this->available[1].notify_one();

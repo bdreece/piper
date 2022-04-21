@@ -34,8 +34,8 @@
 #include <memory>
 #include <stdexcept>
 
-#include "piper/channel.hpp"
 #include "piper/internal/buffer.hpp"
+#include "piper/piper.hpp"
 
 namespace piper::spmc {
     template <typename T> class Sender;
