@@ -32,8 +32,13 @@
  */
 
 #include <memory>
-#include <tuple>
 #include <utility>
+
+/**
+ * @namespace	piper
+ * @brief		Global namespace for piper channel interfaces and
+ * 				implementations
+ */
 namespace piper {
     template <typename T> class Sender;
     /**
