@@ -1,0 +1,5 @@
+<map id="tests/tests.hpp" name="tests/tests.hpp">
+<area shape="rect" id="node1" title="Metaheader for testing suites." alt="" coords="73,5,181,32"/>
+<area shape="rect" id="node2" href="$mpsc_8cpp.html" title="MPSC testing suite." alt="" coords="5,80,116,107"/>
+<area shape="rect" id="node3" href="$spmc_8cpp.html" title="SPMC testing suite." alt="" coords="140,80,251,107"/>
+</map>
