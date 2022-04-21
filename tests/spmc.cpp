@@ -31,100 +31,102 @@
  * @date		2022-04-19
  */
 
-#include <functional>
-#include <memory>
-#include <stdexcept>
-#include <thread>
-#include <tuple>
-#include <vector>
-
 #define BOOST_TEST_MODULE spmc
 #include <boost/test/unit_test.hpp>
 
 #include "piper/spmc.hpp"
-using namespace piper::spmc;
-
-BOOST_AUTO_TEST_SUITE(spmc_exceptions)
+#include "tests.hpp"
 
 /**
- * @test spmc_exceptions/expired
- * @brief Asserts that exception is throw if rx.recv()
- * 		  is called after tx is destroyed.
+ * @namespace piper::tests::spmc
+ * @brief 	  Testing suite for SPMC channel implemenation
  */
-BOOST_AUTO_TEST_CASE(expired) {
-    auto tx = new Sender<int>{};
-    auto rx = Receiver<int>{*tx};
-    delete tx;
-    try {
-        int val = rx.recv();
-    } catch (const std::runtime_error& e) {
-        BOOST_TEST(e.what() == "sender is expired");
+namespace piper::tests::spmc {
+    using Sender = piper::spmc::Sender<int>;
+    using Receiver = piper::spmc::Receiver<int>;
+
+    BOOST_AUTO_TEST_SUITE(spmc_exceptions)
+
+    /**
+     * @test spmc_exceptions/expired
+     * @brief Asserts that exception is throw if rx.recv()
+     * 		  is called after tx is destroyed.
+     */
+    BOOST_AUTO_TEST_CASE(expired) {
+        auto tx = new Sender{};
+        auto rx = Receiver{*tx};
+        delete tx;
+        try {
+            int val = rx.recv();
+        } catch (const std::runtime_error& e) {
+            BOOST_TEST(e.what() == "sender is expired");
+        }
     }
-}
 
-BOOST_AUTO_TEST_SUITE_END()
+    BOOST_AUTO_TEST_SUITE_END()
 
-BOOST_AUTO_TEST_SUITE(spmc_async)
+    BOOST_AUTO_TEST_SUITE(spmc_async)
 
-struct fixture {
-        std::unique_ptr<Sender<int>> tx;
+    struct fixture {
+            std::unique_ptr<Sender> tx;
 
-        fixture() { tx = std::make_unique<Sender<int>>(); }
-};
+            fixture() { tx = std::make_unique<Sender>(); }
+    };
 
-/**
- * @test spmc_async/one_receiver
- * @brief Asserts that one sender can send one receiver
- * 		  five integers.
- */
-BOOST_FIXTURE_TEST_CASE(one_receiver, fixture) {
-    std::thread worker(
-        [](auto&& rx) {
-            for (int i = 0; i < 5; i++) {
-                int j;
-                BOOST_TEST(rx.recv() == i);
-            }
-        },
-        std::move(Receiver<int>{*tx}));
-
-    for (int i = 0; i < 5; i++) {
-        *tx << i;
-    }
-}
-
-/**
- * @test spmc_async/five_receivers
- * @brief Asserts that one sender can send five receivers
- * 		  ten integers.
- */
-BOOST_FIXTURE_TEST_CASE(five_receivers, fixture) {
-    std::vector<std::thread> workers(5);
-    std::generate(workers.begin(), workers.end(), [this]() {
-        return std::thread(
-            [](auto rx) {
-                int n = 0;
-                while (n < 2) {
-                    auto i = rx.recv();
-                    n++;
+    /**
+     * @test spmc_async/one_receiver
+     * @brief Asserts that one sender can send one receiver
+     * 		  five integers.
+     */
+    BOOST_FIXTURE_TEST_CASE(one_receiver, fixture) {
+        std::thread worker(
+            [](auto&& rx) {
+                for (int i = 0; i < 5; i++) {
+                    int j;
+                    BOOST_TEST(rx.recv() == i);
                 }
-                BOOST_TEST(true);
             },
-            Receiver<int>(*tx));
-    });
+            std::move(Receiver{*tx}));
 
-    for (int i = 0; i < 10; i++) {
-        *tx << i;
+        for (int i = 0; i < 5; i++) {
+            *tx << i;
+        }
     }
-}
 
-BOOST_AUTO_TEST_SUITE_END() // spmc_async
+    /**
+     * @test spmc_async/five_receivers
+     * @brief Asserts that one sender can send five receivers
+     * 		  ten integers.
+     */
+    BOOST_FIXTURE_TEST_CASE(five_receivers, fixture) {
+        std::vector<std::thread> workers(5);
+        std::generate_n(std::back_inserter(workers), 5, [this]() {
+            return std::thread(
+                [](auto rx) {
+                    int n = 0;
+                    while (n < 2) {
+                        auto i = rx.recv();
+                        n++;
+                    }
+                    BOOST_TEST(true);
+                },
+                Receiver(*tx));
+        });
 
-BOOST_AUTO_TEST_SUITE(spmc_sync)
+        for (int i = 0; i < 10; i++) {
+            *tx << i;
+        }
+    }
 
-struct fixture {
-        std::unique_ptr<Sender<int>> tx;
+    BOOST_AUTO_TEST_SUITE_END() // spmc_async
 
-        fixture() { tx = std::make_unique<Sender<int>>(); }
-};
+    BOOST_AUTO_TEST_SUITE(spmc_sync)
 
-BOOST_AUTO_TEST_SUITE_END() // synch
+    struct fixture {
+            std::unique_ptr<Sender> tx;
+
+            fixture() { tx = std::make_unique<Sender>(); }
+    };
+
+    BOOST_AUTO_TEST_SUITE_END() // synch
+} // namespace piper::tests::spmc

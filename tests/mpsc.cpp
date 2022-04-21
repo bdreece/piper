@@ -31,89 +31,86 @@
  * @date		2022-04-19
  */
 
-#include <algorithm>
-#include <array>
-#include <iterator>
-#include <memory>
-#include <stdexcept>
-#include <thread>
-#include <tuple>
-
 #define BOOST_TEST_MODULE mpsc
 #include <boost/test/unit_test.hpp>
 
 #include "piper/mpsc.hpp"
-using namespace piper::mpsc;
-
-BOOST_AUTO_TEST_SUITE(mpsc_exceptions)
+#include "tests.hpp"
 
 /**
- * @test 	mpsc_exceptions/expired
- * @brief 	Asserts that tx.send() throws exception
- * 		  	after rx is destroyed.
+ * @namespace 	piper::tests::mpsc
+ * @brief		Testing suite for MPSC channel implementation
  */
-BOOST_AUTO_TEST_CASE(expired) {
-    using namespace piper::mpsc;
-    auto rx = new Receiver<int>{};
-    auto tx = Sender<int>{*rx};
-    delete rx;
-    try {
-        tx.send(1);
-    } catch (const std::runtime_error& e) {
-        BOOST_TEST(e.what() == "receiver is expired");
-    }
-}
+namespace piper::tests::mpsc {
+    using Sender = piper::mpsc::Sender<int>;
+    using Receiver = piper::mpsc::Receiver<int>;
 
-BOOST_AUTO_TEST_SUITE_END() // mpsc_exceptions
+    BOOST_AUTO_TEST_SUITE(mpsc_exceptions)
 
-BOOST_AUTO_TEST_SUITE(mpsc_async)
+    /**
+     * @test 	mpsc_exceptions/expired
+     * @brief 	Asserts that tx.send() throws exception
+     * 		  	after rx is destroyed.
+     */
+    BOOST_AUTO_TEST_CASE(expired) {
 
-struct fixture {
-        std::unique_ptr<piper::mpsc::Receiver<int>> rx;
-
-        fixture() {
-            using namespace piper::mpsc;
-            rx = std::make_unique<Receiver<int>>();
+        auto rx = new Receiver{};
+        auto tx = Sender{*rx};
+        delete rx;
+        try {
+            tx.send(1);
+        } catch (const std::runtime_error& e) {
+            BOOST_TEST(e.what() == "receiver is expired");
         }
-};
-
-/**
- * @test one_sender
- * @brief Asserts that one sender can send one receiver
- * 		  five integers over the channel to the receiver.
- */
-BOOST_FIXTURE_TEST_CASE(one_sender, fixture) {
-    using namespace piper::mpsc;
-    std::thread worker(
-        [](auto&& tx) {
-            for (int i = 0; i < 5; i++) {
-                tx << i;
-            }
-        },
-        std::move(Sender<int>{*rx}));
-    for (int i = 0; i < 5; i++) {
-        BOOST_TEST(rx->recv() == 1);
-    }
-    worker.join();
-}
-
-/**
- * @test mpsc_async/five_senders
- * @brief Asserts that five senders can send one receiver
- * 		  five integers over the channel.
- */
-BOOST_FIXTURE_TEST_CASE(five_senders, fixture) {
-    using namespace piper::mpsc;
-    std::vector<std::thread> workers{5};
-    std::generate(workers.begin(), workers.end(), [this]() {
-        return std::thread([](auto tx) { tx << 1; }, Sender<int>{*rx});
-    });
-
-    for (int i = 0; i < 5; i++) {
-        BOOST_TEST(rx->recv() == 1);
     }
 
-    std::for_each(workers.begin(), workers.end(), [](auto& tx) { tx.join(); });
-}
+    BOOST_AUTO_TEST_SUITE_END() // mpsc_exceptions
 
-BOOST_AUTO_TEST_SUITE_END() // mpsc_async
+    BOOST_AUTO_TEST_SUITE(mpsc_async)
+
+    struct fixture {
+            std::unique_ptr<Receiver> rx;
+
+            fixture() { rx = std::make_unique<Receiver>(); }
+    };
+
+    /**
+     * @test one_sender
+     * @brief Asserts that one sender can send one receiver
+     * 		  five integers over the channel to the receiver.
+     */
+    BOOST_FIXTURE_TEST_CASE(one_sender, fixture) {
+        std::thread worker(
+            [](auto&& tx) {
+                for (int i = 0; i < 5; i++) {
+                    tx << i;
+                }
+            },
+            std::move(Sender{*rx}));
+        for (int i = 0; i < 5; i++) {
+            BOOST_TEST(rx->recv() == 1);
+        }
+        worker.join();
+    }
+
+    /**
+     * @test mpsc_async/five_senders
+     * @brief Asserts that five senders can send one receiver
+     * 		  five integers over the channel.
+     */
+    BOOST_FIXTURE_TEST_CASE(five_senders, fixture) {
+        std::vector<std::thread> workers;
+        std::generate_n(std::back_inserter(workers), 5, [this]() {
+            return std::thread([](auto tx) { tx << 1; }, Sender{*rx});
+        });
+
+        for (int i = 0; i < 5; i++) {
+            BOOST_TEST(rx->recv() == 1);
+        }
+
+        std::for_each(workers.begin(), workers.end(),
+                      [](auto& tx) { tx.join(); });
+    }
+
+    BOOST_AUTO_TEST_SUITE_END() // mpsc_async
+} // namespace piper::tests::mpsc
