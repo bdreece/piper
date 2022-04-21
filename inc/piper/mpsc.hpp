@@ -41,12 +41,13 @@
 
 namespace piper::mpsc {
     template <typename T> class Sender;
+    template <typename T> class Channel;
 
     /**
      * @class Receiver
      * @brief MPSC receiver
      * @tparam T The item being received over the channel
-     * @extends piper::Receiver<T>
+     * @implements piper::Receiver<T>
      */
     template <typename T> class Receiver : public piper::Receiver<T> {
             friend class Sender<T>;
@@ -66,6 +67,8 @@ namespace piper::mpsc {
              */
             Receiver(std::size_t n);
             Receiver(Receiver<T>&&) = default;
+            Receiver(Channel<T>&& ch)
+                : Receiver(std::forward<Receiver<T>>(ch.rx)) {}
             Receiver(const Receiver<T>&) = delete;
 
             /**
@@ -80,7 +83,7 @@ namespace piper::mpsc {
      * @class Sender
      * @brief MPSC sender
      * @tparam T The item being sent over the channel
-     * @extends piper::Sender<T>
+     * @implements piper::Sender<T>
      */
     template <typename T> class Sender : public piper::Sender<T> {
             std::weak_ptr<piper::internal::Buffer<T>> buffer;
@@ -90,12 +93,14 @@ namespace piper::mpsc {
              * @brief Creates a new Sender from a Receiver
              * @param rx The connected receiver
              */
-            Sender(const Receiver<T>& rx) : buffer{rx.buffer} {}
+            Sender(const Receiver<T>& rx) : buffer(rx.buffer) {}
+
             /**
-             * @brief Clones a sender
-             * @param tx The sender to clone
+             * @brief Creates a new Sender from a Channel
+             * @param ch The channel
              */
-            Sender(const Sender<T>& tx) = default;
+            Sender(const Channel<T>& ch) : Sender(ch.rx) {}
+
             Sender(Sender<T>&&) = default;
             Sender() = delete;
 
@@ -110,40 +115,35 @@ namespace piper::mpsc {
             void send(T&& item) noexcept(false) override;
     };
 
-    /**
-     * @brief Creates an asynchronous channel
-     * @return A sender and a receiver
-     */
-    template <typename T> std::tuple<Sender<T>, Receiver<T>> channel() {
-        auto rx = Receiver<T>();
-        auto tx = Sender<T>(rx);
-        return std::make_tuple(tx, rx);
-    }
+    template <typename T> class Channel final : public piper::Channel<T> {
+            friend class Sender<T>;
+            friend class Receiver<T>;
+            std::unique_ptr<Sender<T>> tx;
+            std::unique_ptr<Receiver<T>> rx;
 
-    /**
-     * @brief Creates a synchronous channel
-     * @param n The size of the buffer
-     * @return A sender and a receiver
-     * @note A size of 0 represents a rendezvous channel
-     */
-    template <typename T>
-    std::tuple<Sender<T>, Receiver<T>> channel(std::size_t n) {
-        auto rx = Receiver<T>(n);
-        auto tx = Sender<T>(rx);
-        return std::make_tuple(tx, rx);
-    }
+        public:
+            Channel() : rx{new Receiver<T>()}, tx(*this->rx){};
+            Channel(std::size_t n) : rx{new Receiver<T>(n)}, tx(*this->rx) {}
+
+            Channel(Channel<T>&&) = default;
+
+            T recv() override;
+
+            void send(const T& item) override;
+            void send(T&& item) override;
+    };
 
     template <typename T> Receiver<T>::Receiver() {
         using namespace piper::internal;
-        buffer.reset(new AsyncBuffer<T>{});
+        buffer.reset(new AsyncBuffer<T>());
     }
 
     template <typename T> Receiver<T>::Receiver(std::size_t n) {
         using namespace piper::internal;
         if (n > 0) {
-            buffer.reset(new SyncBuffer<T>{n});
+            buffer.reset(new SyncBuffer<T>(n));
         } else {
-            buffer.reset(new RendezvousBuffer<T>{});
+            buffer.reset(new RendezvousBuffer<T>());
         }
     }
 
@@ -160,4 +160,15 @@ namespace piper::mpsc {
             throw std::runtime_error("receiver is expired");
         buffer.lock()->push(std::forward<T>(item));
     }
+
+    template <typename T> T Channel<T>::recv() { return rx->recv(); }
+
+    template <typename T> void Channel<T>::send(const T& item) {
+        tx->send(item);
+    }
+
+    template <typename T> void Channel<T>::send(T&& item) {
+        tx->send(std::forward<T>(item));
+    }
+
 } // namespace piper::mpsc

@@ -39,6 +39,7 @@
 
 namespace piper::spmc {
     template <typename T> class Sender;
+    template <typename T> class Channel;
 
     /**
      * @class Receiver
@@ -55,6 +56,7 @@ namespace piper::spmc {
              * @param tx The connected Sender
              */
             Receiver(const Sender<T>& tx) : buffer{tx.buffer} {}
+            Receiver(const Channel<T>& ch) : Receiver(ch.tx) {}
             Receiver(const Receiver<T>&) = default;
             Receiver(Receiver<T>&&) = default;
             Receiver() = delete;
@@ -93,6 +95,7 @@ namespace piper::spmc {
              */
             Sender(std::size_t n);
             Sender(Sender<T>&&) = default;
+            Sender(Channel<T>&& ch) : Sender(std::forward<Sender<T>>(ch.tx)) {}
             Sender(const Sender<T>&) = delete;
 
             /**
@@ -104,28 +107,21 @@ namespace piper::spmc {
             void send(T&& item) override;
     };
 
-    /**
-     * @brief Creates an asynchronous channel
-     * @return A sender and a receiver
-     */
-    template <typename T> std::tuple<Sender<T>, Receiver<T>> channel() {
-        auto tx = Sender<T>();
-        auto rx = Receiver<T>(tx);
-        return std::make_tuple(tx, rx);
-    }
+    template <typename T> class Channel final : public piper::Channel<T> {
+            friend class Sender<T>;
+            friend class Receiver<T>;
+            std::unique_ptr<Sender<T>> tx;
+            std::unique_ptr<Receiver<T>> rx;
 
-    /**
-     * @brief Creates a synchronous channel
-     * @param n The size of the buffer
-     * @return A sender and a receiver
-     * @note A size of zero represents a rendezvous channel
-     */
-    template <typename T>
-    std::tuple<Sender<T>, Receiver<T>> channel(std::size_t n) {
-        auto tx = Sender<T>(n);
-        auto rx = Receiver<T>(tx);
-        return std::make_tuple(tx, rx);
-    }
+        public:
+            Channel() : tx(), rx(this->tx) {}
+            Channel(std::size_t n) : tx(n), rx(this->tx) {}
+            Channel(Channel<T>&&) = default;
+
+            T recv() override;
+            void send(const T& item) override;
+            void send(T&& item) override;
+    };
 
     template <typename T> T Receiver<T>::recv() {
         if (buffer.expired())
@@ -153,5 +149,15 @@ namespace piper::spmc {
 
     template <typename T> void Sender<T>::send(T&& item) {
         buffer->push(std::forward<T>(item));
+    }
+
+    template <typename T> T Channel<T>::recv() { return rx->recv(); }
+
+    template <typename T> void Channel<T>::send(const T& item) {
+        tx->send(item);
+    }
+
+    template <typename T> void Channel<T>::send(T&& item) {
+        tx->send(std::forward<T>(item));
     }
 } // namespace piper::spmc
