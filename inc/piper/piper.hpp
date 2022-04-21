@@ -23,7 +23,7 @@
  */
 
 /**
- *  @file 		channel.hpp
+ *  @file 		piper.hpp
  *  @brief 		Abstract channel interfaces
  *  @author 	Brian Reece
  *  @version 	0.1
@@ -37,35 +37,39 @@
 namespace piper {
     template <typename T> class Sender;
     /**
-     * @interface Receiver
-     * @brief The interface for channel receivers
-     * @tparam T The type of the item being received over the channel
+     * @interface	Receiver
+     * @brief 		The interface for channel receivers
+     * @tparam 		T The type of the item being received over the channel
      */
     template <typename T> class Receiver {
         public:
-            virtual ~Receiver() {}
             /**
-             * @brief Receives an item from the channel
-             * @return The item received over the channel
-             * @note Implementors of this interface may block on this method,
-             * 		 and may also throw exceptions.
+             * @brief	Destructs a Receiver
+             */
+            virtual ~Receiver() {}
+
+            /**
+             * @brief 	Receives an item from the channel
+             * @return 	The item received over the channel
+             * @note 	Implementors of this interface may block on this method,
+             * 		 	and may also throw exceptions.
              */
             virtual T recv() = 0;
 
             /**
-             * @brief Extract item from channel
-             * @param item The received item
-             * @return The receiver, for chained extractions
-             * @note This method assigns item to the return of recv()
+             * @brief	Copies item from channel
+             * @param 	item The output of the Receiver
+             * @return 	The receiver, for chained extractions
+             * @note 	This method assigns item to the return of recv()
              */
             Receiver<T>& operator>>(T& item);
 
             /**
-             * @brief Pipe extracted item into sender
-             * @param tx The sender
-             * @return The receiver, for chained extractions
-             * @note This method forwards the return of recv()
-             * 		 to Sender::send()
+             * @brief 	Moves received item into Sender
+             * @param 	tx The sender into which the item is moved
+             * @return 	The receiver, for chained extractions
+             * @note 	This method forwards the return of recv()
+             * 		 	to Sender::send()
              * @warning Passing the connected sender to this
              * 			method with a rendezvous channel will
              * 			cause deadlock.
@@ -74,38 +78,55 @@ namespace piper {
     };
 
     /**
-     * @interface Sender
-     * @brief The interface for channel senders
-     * @tparam T The type of the item being sent over the channel
+     * @interface 	Sender
+     * @brief 		The interface for channel senders
+     * @tparam 		T The type of the item being sent over the channel
      */
     template <typename T> class Sender {
         public:
+            /**
+             * @brief 	Destructs a Sender
+             */
             virtual ~Sender() {}
 
             /**
-             * @brief Sends an item over the channel
-             * @param item The item being sent over the channel
-             * @note Implementors of this interface may block on this method,
-             * 		 and may also throw exceptions.
+             * @brief 	Copies and sends an item over the channel
+             * @param 	item The item being sent over the channel
+             * @note 	Implementors of this interface may block on this method,
+             * 		 	and may also throw exceptions.
              */
             virtual void send(const T& item) = 0;
+
+            /**
+             * @brief 	Moves and sends an item over the channel
+             * @param 	item The item being sent over the channel
+             * @note 	Implementors of this interface may block on this method,
+             * 		 	and may also throw exceptions.
+             */
             virtual void send(T&& item) = 0;
 
             /**
-             * @brief Insert item into channel
-             * @param item The item being sent over the channel
-             * @return The sender, for chained insertions
-             * @note This method forwards item to send()
+             * @brief	Copies and sends an item over the channel
+             * @param 	item The item being sent over the channel
+             * @return 	The sender, for chained insertions
+             * @note 	This method forwards item to send()
              */
             Sender<T>& operator<<(const T& item);
+
+            /**
+             * @brief 	Moves and sends an item over the channel
+             * @param 	item The item being sent over the channel
+             * @return 	The sender, for chained insertions
+             * @note 	This method forwards item to send()
+             */
             Sender<T>& operator<<(T&& item);
 
             /**
-             * @brief Insert received item into channel
-             * @param rx The receiver
-             * @return The sender, for chained insertions
-             * @note This method forwards Receiver::recv() to
-             * 		 send()
+             * @brief 	Moves received item into Sender
+             * @param 	rx The receiver from which item is moved
+             * @return 	The sender, for chained insertions
+             * @note 	This method forwards Receiver::recv() to
+             * 		 	send()
              * @warning Passing the connected receiver to this
              * 			method with a rendezvous channel will
              * 			cause deadlock.
@@ -114,10 +135,10 @@ namespace piper {
     };
 
     /**
-     * @class Channel
-     * @brief A bidirectional channel interface
-     * @tparam T The type of item being exchanged over the channel
-     * @implements Sender<T>, Receiver<T>
+     * @interface	Channel
+     * @brief 		A bidirectional channel interface
+     * @tparam 		T The type of item being exchanged over the channel
+     * @implements	Sender, Receiver
      */
     template <typename T> class Channel : public Sender<T>, public Receiver<T> {
         public:

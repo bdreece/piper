@@ -39,15 +39,20 @@
 #include "piper/internal/buffer.hpp"
 #include "piper/piper.hpp"
 
+/**
+ * @namespace 	piper::mpsc
+ * @brief 		Concrete Channel, Sender, and Receiver implementations
+ * 				for multiple producer, single consumer channels
+ */
 namespace piper::mpsc {
     template <typename T> class Sender;
     template <typename T> class Channel;
 
     /**
      * @class Receiver
-     * @brief MPSC receiver
+     * @brief MPSC channel receiver
      * @tparam T The item being received over the channel
-     * @implements piper::Receiver<T>
+     * @implements piper::Receiver
      */
     template <typename T> class Receiver : public piper::Receiver<T> {
             friend class Sender<T>;
@@ -56,65 +61,91 @@ namespace piper::mpsc {
 
         public:
             /**
-             * @brief Creates an asynchronous receiver
+             * @brief 	Constructs an asynchronous Receiver
              */
             Receiver();
 
             /**
-             * @brief Creates a synchronous receiver
-             * @param n The size of the buffer
-             * @note A size of zero represents a rendezvous channel
+             * @brief 	Constructs a synchronous Receiver
+             * @param 	n The size of the buffer
+             * @note 	A size of zero represents a rendezvous channel
              */
             Receiver(std::size_t n);
-            Receiver(Receiver<T>&&) = default;
+
+            /**
+             * @brief 	Moves a Receiver
+             * @param 	rx The Receiver to move
+             */
+            Receiver(Receiver<T>&& rx) = default;
+
+            /**
+             * @brief 	Moves a Receiver from a Channel
+             * @param 	ch The Channel from which Receiver is moved
+             */
             Receiver(Channel<T>&& ch)
                 : Receiver(std::forward<Receiver<T>>(ch.rx)) {}
+
             Receiver(const Receiver<T>&) = delete;
 
             /**
-             * @brief Receives an item from the channel
-             * @return The item received from the channel
-             * @note Blocks on an empty buffer
+             * @brief 	Receives an item from the channel
+             * @return 	The item received from the channel
+             * @note 	Blocks on an empty buffer
              */
             T recv() override;
     };
 
     /**
-     * @class Sender
-     * @brief MPSC sender
-     * @tparam T The item being sent over the channel
-     * @implements piper::Sender<T>
+     * @class 		Sender
+     * @brief 		MPSC channel sender
+     * @tparam 		T The item being sent over the channel
+     * @implements 	piper::Sender
      */
     template <typename T> class Sender : public piper::Sender<T> {
             std::weak_ptr<piper::internal::Buffer<T>> buffer;
 
         public:
             /**
-             * @brief Creates a new Sender from a Receiver
-             * @param rx The connected receiver
+             * @brief 	Copies a Sender from a Receiver
+             * @param 	rx The Receiver from which Sender is copied
              */
             Sender(const Receiver<T>& rx) : buffer(rx.buffer) {}
 
             /**
-             * @brief Creates a new Sender from a Channel
-             * @param ch The channel
+             * @brief 	Copies a Sender from a Channel
+             * @param 	ch The Channel from which Sender is copied
              */
             Sender(const Channel<T>& ch) : Sender(ch.rx) {}
 
-            Sender(Sender<T>&&) = default;
+            /**
+             * @brief	Moves a Sender
+             * @param	tx The Sender to move
+             */
+            Sender(Sender<T>&& tx) = default;
+
             Sender() = delete;
 
             /**
-             * @brief Sends an item over the channel
-             * @param item The item to send over the channel
-             * @throws std::runtime_error Thrown if the receiver
-             * 		   no longer exists.
-             * @note Blocks if using a synchronous buffer
+             * @brief 	Copies and sends an item over the channel
+             * @param 	item The item being sent over the channel
+             * @note  	May block if using a synchronous buffer
              */
             void send(const T& item) noexcept(false) override;
+
+            /**
+             * @brief 	Moves and sends an item over the channel
+             * @param 	item The item being sent over the channel
+             * @note  	May block if using a synchronous buffer
+             */
             void send(T&& item) noexcept(false) override;
     };
 
+    /**
+     * @class 		Channel
+     * @brief 		A multiple producer, single consumer channel
+     * @tparam 		T The item being exchanged over the channel
+     * @implements 	piper::Channel
+     */
     template <typename T> class Channel : public piper::Channel<T> {
             friend class Sender<T>;
             friend class Receiver<T>;
@@ -122,14 +153,43 @@ namespace piper::mpsc {
             std::unique_ptr<Receiver<T>> rx;
 
         public:
+            /**
+             * @brief 	Constructs an asynchronous Channel
+             */
             Channel() : rx{new Receiver<T>()}, tx(*this->rx){};
+
+            /**
+             * @brief 	Constructs a synchronous Channel
+             * @param	n The size of the buffer
+             * @note	A size of 0 represents a rendezvous buffer
+             */
             Channel(std::size_t n) : rx{new Receiver<T>(n)}, tx(*this->rx) {}
 
-            Channel(Channel<T>&&) = default;
+            /**
+             * @brief	Moves a Channel
+             * @param 	ch The Channel to move
+             */
+            Channel(Channel<T>&& ch) = default;
 
+            /**
+             * @brief 	Receives an item from the channel
+             * @return 	The item received from the channel
+             * @note 	Blocks on an empty buffer
+             */
             T recv() override;
 
+            /**
+             * @brief 	Copies and sends an item over the channel
+             * @param 	item The item being sent over the channel
+             * @note  	May block if using a synchronous buffer
+             */
             void send(const T& item) override;
+
+            /**
+             * @brief 	Moves and sends an item over the channel
+             * @param 	item The item being sent over the channel
+             * @note  	May block if using a synchronous buffer
+             */
             void send(T&& item) override;
     };
 

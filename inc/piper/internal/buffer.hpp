@@ -38,11 +38,15 @@
 #include <optional>
 #include <utility>
 
+/**
+ * @namespace 	piper::internal
+ * @brief 		Channel inner buffer interface and implementations
+ */
 namespace piper::internal {
     /**
-     * @class Buffer
-     * @brief Shared channel buffer base class
-     * @tparam T The type of item stored in the buffer
+     * @class	Buffer
+     * @brief 	Shared channel buffer base class
+     * @tparam 	T The type of item stored in the buffer
      */
     template <typename T> class Buffer {
         protected:
@@ -50,27 +54,33 @@ namespace piper::internal {
 
         public:
             /**
-             * @brief Pushes an item into the buffer
-             * @param item The item being pushed into the buffer
-             * @note Implementors of this virtual method may block.
+             * @brief 	Copies and pushes an item into the buffer
+             * @param 	item The item being pushed into the buffer
+             * @note 	Implementors of this virtual method may block.
              */
             virtual void push(const T& item) = 0;
+
+            /**
+             * @brief 	Moves and pushes an item into the buffer
+             * @param 	item The item being pushed into the buffer
+             * @note 	Implementors of this virtual method may block.
+             */
             virtual void push(T&& item) = 0;
 
             /**
-             * @brief Pops an item from the buffer
-             * @return The item being popped from the buffer
-             * @note Implementors of this virtual method will block
-             * 		 on an empty buffer
+             * @brief 	Pops an item from the buffer
+             * @return 	The item being popped from the buffer
+             * @note 	Implementors of this virtual method will block
+             * 		 	on an empty buffer
              */
             virtual T pop() = 0;
     };
 
     /**
-     * @class AsyncBuffer
-     * @brief An asynchronous, unbounded buffer
-     * @tparam T The type of item stored in the buffer
-     * @extends Buffer<T>
+     * @class	AsyncBuffer
+     * @brief 	An asynchronous, unbounded buffer
+     * @tparam 	T The type of item stored in the buffer
+     * @extends Buffer
      */
     template <typename T> class AsyncBuffer final : public Buffer<T> {
             std::condition_variable available;
@@ -78,33 +88,40 @@ namespace piper::internal {
 
         public:
             /**
-             * @brief Creates an unbounded buffer
+             * @brief Constructs an asynchronous buffer
              */
             AsyncBuffer() = default;
+
             AsyncBuffer(const AsyncBuffer<T>&) = delete;
             AsyncBuffer(AsyncBuffer<T>&&) = delete;
 
             /**
-             * @brief Pushes an item into the buffer
-             * @param item The item being pushed into the buffer
-             * @note This method should not block
+             * @brief 	Copies and pushes an item into the buffer
+             * @param 	item The item being pushed into the buffer
+             * @note 	This implementation should not block
              */
             void push(const T& item) override;
+
+            /**
+             * @brief 	Moves and pushes an item into the buffer
+             * @param 	item The item being pushed into the buffer
+             * @note 	This implementation should not block
+             */
             void push(T&& item) override;
 
             /**
-             * @brief Pops an item from the buffer
-             * @return The item being popped from the buffer
-             * @note Blocks on an empty buffer
+             * @brief 	Pops an item from the buffer
+             * @return 	The item being popped from the buffer
+             * @note 	Blocks on an empty buffer
              */
             T pop() override;
     };
 
     /**
-     * @class SyncBuffer
-     * @brief A synchronous, bounded buffer
-     * @tparam T The type of item stored in the buffer
-     * @extends Buffer<T>
+     * @class 	SyncBuffer
+     * @brief 	A synchronous, bounded buffer
+     * @tparam 	T The type of item stored in the buffer
+     * @extends Buffer
      */
     template <typename T> class SyncBuffer : public Buffer<T> {
         protected:
@@ -114,23 +131,32 @@ namespace piper::internal {
 
         public:
             /**
-             * @brief Creates a bounded buffer
-             * @param n The size of the buffer
-             * @note The size of the buffer should be at least 1. A
-             * 		 synchronous buffer of size 0 is implemented as
-             * 		 RendezvousBuffer<T>
+             * @brief 	Constructs a synchronous buffer
+             * @param 	n The size of the buffer
+             * @note 	The size of the buffer should be at least 1.
+             * 			If an unbuffered channel is desired, use
+             * 			RendezvousBuffer.
+             * @warning Passing n = 0 to this constructor may result
+             * 			in undefined behavior
              */
             SyncBuffer(std::size_t n) : Buffer<T>(), n(n){};
+
             SyncBuffer() = delete;
             SyncBuffer(const SyncBuffer<T>&) = delete;
             SyncBuffer(SyncBuffer<T>&&) = delete;
 
             /**
-             * @brief Pushes an item into the buffer
-             * @param item The item being pushed into the buffer
-             * @note Blocks on a full buffer
+             * @brief 	Copies and pushes an item into the buffer
+             * @param 	item The item being pushed into the buffer
+             * @note 	This implementation should not block
              */
             virtual void push(const T& item) override;
+
+            /**
+             * @brief 	Moves and pushes an item into the buffer
+             * @param 	item The item being pushed into the buffer
+             * @note 	This implementation should not block
+             */
             virtual void push(T&& item) override;
 
             /**
@@ -142,13 +168,13 @@ namespace piper::internal {
     };
 
     /**
-     * @class RendezvousBuffer
-     * @brief A synchronous, rendezvous buffer
+     * @class 	RendezvousBuffer
+     * @brief 	A synchronous, rendezvous buffer
      * @details A rendezvous buffer has no capacity. Subsequently, calls to
-     * 			push will block until another thread calls pop, and vice
-     * versa.
-     * @tparam T The type of item transferred over the buffer
-     * @extends SyncBuffer<T>
+     * 			push will block until another thread has collected the
+     * 			value, and vice versa.
+     * @tparam 	T The type of item transferred over the buffer
+     * @extends Buffer
      */
     template <typename T> class RendezvousBuffer final : public Buffer<T> {
             std::optional<T> item;
@@ -156,7 +182,7 @@ namespace piper::internal {
 
         public:
             /**
-             * @brief Creates a rendezvous buffer
+             * @brief Constructs a rendezvous buffer
              */
             RendezvousBuffer() : Buffer<T>(){};
 
@@ -164,11 +190,17 @@ namespace piper::internal {
             RendezvousBuffer(RendezvousBuffer<T>&&) = delete;
 
             /**
-             * @brief Pushes an item into the buffer
-             * @param item The item being pushed into the buffer
-             * @note Blocks awaiting a call to pop()
+             * @brief 	Copies and pushes an item into the buffer
+             * @param 	item The item being pushed into the buffer
+             * @note 	This implementation should not block
              */
             void push(const T& item) override;
+
+            /**
+             * @brief 	Moves and pushes an item into the buffer
+             * @param 	item The item being pushed into the buffer
+             * @note 	This implementation should not block
+             */
             void push(T&& item) override;
 
             /**
